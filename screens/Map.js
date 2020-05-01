@@ -273,7 +273,6 @@ class Map extends Component {
                       const opacityStyle = {
                         opacity: interpolations[index].opacity,
                       };
-                   
                     return(
                         <MapView.Marker
                             key={index} 
@@ -286,52 +285,52 @@ class Map extends Component {
                         </MapView.Marker>
                     )
                 })}
-            </MapView>
-            <Animated.ScrollView
-                horizontal
-                scrollEventThrottle={1}
-                showsHorizontalScrollIndicator={false}
-                snapToInterval={CARD_WIDTH}
-                onScroll={Animated.event(
-                    [
-                    {
-                        nativeEvent: {
-                        contentOffset: {
-                            x: this.animation,
+                </MapView>
+                <Animated.ScrollView
+                    horizontal
+                    scrollEventThrottle={1}
+                    showsHorizontalScrollIndicator={false}
+                    snapToInterval={CARD_WIDTH}
+                    onScroll={Animated.event(
+                        [
+                        {
+                            nativeEvent: {
+                            contentOffset: {
+                                x: this.animation,
+                            },
+                            },
                         },
-                        },
-                    },
-                    ],
-                    { useNativeDriver: true }
-                )}
-                style={styles.scrollView}
-                contentContainerStyle={styles.endPadding}
-                >
-                {this.state.markers.map((marker, index) => (
-                    <View style={styles.card} key={index}>
-                        <Image
-                            source={{uri:marker.image}}
-                            style={styles.cardImage}
-                            resizeMode="cover"
-                        />
-                        <View style={styles.textContent}>
-                            <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
-                              onPress={(e) => {e.stopPropagation(); this.tinderScreen(marker)}}>
-                              <Text 
-                                    numberOfLines={1} 
-                                    style={styles.cardtitle}>
-                                {marker.name}
-                              </Text> 
-                            </TouchableHighlight>
+                        ],
+                        { useNativeDriver: true }
+                    )}
+                    style={styles.scrollView}
+                    contentContainerStyle={styles.endPadding}
+                    >
+                    {this.state.markers.map((marker, index) => (
+                        <View style={styles.card} key={index}>
+                            <Image
+                                source={{uri:marker.image}}
+                                style={styles.cardImage}
+                                resizeMode="cover"
+                            />
+                            <View style={styles.textContent}>
+                                <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
+                                  onPress={(e) => {e.stopPropagation(); this.tinderScreen(marker)}}>
+                                  <Text 
+                                        numberOfLines={1} 
+                                        style={styles.cardtitle}>
+                                    {marker.name}
+                                  </Text> 
+                                </TouchableHighlight>
+                            </View>
+                            
                         </View>
-                        
+                    ))}
+                    </Animated.ScrollView>
                     </View>
-                ))}
-           </Animated.ScrollView>
-          </View>
-        )
-    }
-}
+                  )
+              }
+        }
 
 const styles = StyleSheet.create({
     container: {
