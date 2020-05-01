@@ -21,16 +21,6 @@ export default class LogInPage extends React.Component {
   }
 
  async componentDidMount(){
-   let value;
-   if(auth().currentUser){
-    const user = auth().currentUser;
-    const orientation = await firestore().collection('orientation').doc(user.uid).get();
-    value = orientation.data().orientation !== 'gay' ? false : true;
-   }else{
-    value = false;
-   }
-    
-    this.setState({toggle:value})
     Dimensions.addEventListener('change',(dimensions) => {
       this.setState({
         imageHeight: Math.round(dimensions.window.width >= 800 ? 
@@ -40,16 +30,6 @@ export default class LogInPage extends React.Component {
  }
 
  setOrientation = async (value) => {
-    
-    if(auth().currentUser){
-      const user = auth().currentUser
-      const orientation = await firestore().collection('orientation').doc(user.uid).get();
-      const o = value ? 'gay' : 'straight';
-      orientation.ref.set({
-        orientation: o
-      })
-    }
-    
     this.setState({toggle: value})
  }
 
@@ -107,7 +87,14 @@ export default class LogInPage extends React.Component {
         }
           
         const document = await _this.GeoCollectionReferenceSet.doc(result.user.uid).get();
-
+        const userInfo = await firestore().collection('userinfo').doc(result.user.uid).get();
+        userInfo.ref.set({
+          name: result.additionalUserInfo.profile.first_name,
+          image: url,
+          orientation: o,
+          gender: result.user.gender
+        });
+        
         const _watchId = Geolocation.getCurrentPosition((position) => {
 
             if(document && document.exists){
@@ -123,6 +110,7 @@ export default class LogInPage extends React.Component {
                     gender: result.user.gender
                 })
             }
+
             _this.props.navigation.navigate('LoggedInNav');
               
         }).catch(function(error) {

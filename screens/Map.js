@@ -58,7 +58,13 @@ class Map extends Component {
             gender:userobj.gender,
             orientation: orientation.data().orientation
         })
-        
+
+        const userInfo = await firestore().collection('userinfo').doc(this.state.token).get();
+        this.setState({
+            name: userInfo.data().name,
+            image: userInfo.data().image,
+        })
+
         if(this.state.orientation === 'straight' && 
            this.state.gender === 'male' ||
            this.state.gender === 'female'){
@@ -75,12 +81,7 @@ class Map extends Component {
           this.GeoCollectionReferenceSet = this.geofirestore.collection('location');
           this.GeoCollectionReference = this.geofirestore.collection('location');
         }
-       const document = await this.GeoCollectionReferenceSet.doc(userobj.uid).get();
-       this.setState({
-        name: document.data().name,
-        image: document.data().image,
-       })
-
+       
        this.props.navigation.addListener('willFocus', (route) => { 
           if(route.state.routeName === 'Map'){ 
             _this.getLatestMarkers();
@@ -93,11 +94,12 @@ class Map extends Component {
                 const { latitude, longitude } = position.coords;
                 
                 const document = await this.GeoCollectionReferenceSet.doc(this.state.token).get();
-    
-                document.ref.update({
+                if(document && document.exists){
+                  document.ref.update({
                     coordinates: new firestore.GeoPoint(position.coords.latitude, position.coords.longitude)
-                })
-                
+                  })
+                }
+
                 const GeoQuery = this.GeoCollectionReference.near(
                     { 
                      center: new firestore.GeoPoint(position.coords.latitude,
@@ -181,11 +183,22 @@ class Map extends Component {
     }
 
     getLatestMarkers = () => {
-      this._watchId = Geolocation.getCurrentPosition((position) => {
+        this._watchId = Geolocation.getCurrentPosition( async (position) => {
           this.setState({
              latitude: position.coords.latitude,
              longitude: position.coords.longitude
            });
+           const document = await this.GeoCollectionReferenceSet.doc(this.state.token).get();
+           if(!document.exists){
+              const userInfo = await firestore().collection('userinfo').doc(this.state.token).get();
+              document.ref.set({
+                  coordinates: new firestore.GeoPoint(position.coords.latitude, position.coords.longitude),
+                  name: userInfo.data().name,
+                  image: userInfo.data().image,
+                  orientation: userInfo.data().orientation,
+                  gender: userInfo.data().gender
+              })
+           }
            const GeoQuery = this.GeoCollectionReference.near(
               { 
                center: new firestore.GeoPoint(position.coords.latitude,
