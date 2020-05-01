@@ -184,11 +184,14 @@ class Map extends Component {
 
     getLatestMarkers = () => {
         this._watchId = Geolocation.getCurrentPosition( async (position) => {
-          this.setState({
-             latitude: position.coords.latitude,
-             longitude: position.coords.longitude
-           });
+          
+            this.setState({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            })
+
            const document = await this.GeoCollectionReferenceSet.doc(this.state.token).get();
+
            if(!document.exists){
               const userInfo = await firestore().collection('userinfo').doc(this.state.token).get();
               document.ref.set({

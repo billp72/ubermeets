@@ -29,7 +29,7 @@ export default class LogInPage extends React.Component {
     })
  }
 
- setOrientation = async (value) => {
+ setOrientation = (value) => {
     this.setState({toggle: value})
  }
 
