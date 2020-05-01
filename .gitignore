@@ -29,6 +29,7 @@ build/
 local.properties
 strings.xml
 AndroidManifest.xml
+google-services.json
 *.iml
 
 # node.js
