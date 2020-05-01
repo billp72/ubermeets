@@ -73,21 +73,17 @@ class Profile extends Component {
         })         
     }
     
-    tracking = async (value) => {
+    tracking = (value) => {
         const user = auth().currentUser;
         user.gender = 'location'
-        const document = await firestore().collection(user.gender).doc(user.uid).get();
-        if(document && document.exists){
-            firestore().collection(user.gender).doc(user.uid).delete().then(() => {
+        firestore().collection(user.gender).doc(user.uid).delete().then(() => {
                this.setState({
                    disable:true,
                    toggle:value
                 })
-            }).catch(function(error) {
+        }).catch(function(error) {
                 console.error("Error removing document: ", error);
-            });
-        }
-            
+        });      
     }
 
     static navigationOptions = {
