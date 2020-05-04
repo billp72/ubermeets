@@ -31,7 +31,9 @@ strings.xml
 AndroidManifest.xml
 google-services.json
 *.iml
-
+myrelease.jks
+release/
+gradle.properties
 # node.js
 #
 node_modules/
@@ -60,3 +62,4 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+android/gradle.properties

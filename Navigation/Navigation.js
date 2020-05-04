@@ -4,6 +4,7 @@ import FBSDK                     from 'react-native-fbsdk'
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import LoginNav                  from './LoginNav';
 import LoggedInNav               from './LoggedInNav';
+import SplashScreen              from 'react-native-splash-screen';
 
 const { AccessToken } = FBSDK; 
 
@@ -19,6 +20,7 @@ export default class AppContainer extends Component {
   componentDidMount() {
     AccessToken.getCurrentAccessToken()
     .then((data) => {
+      SplashScreen.hide();
       this.setState({
         accessToken: data.accessToken
       })
