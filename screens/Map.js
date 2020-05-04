@@ -12,8 +12,8 @@ import { userServices } from '../services/UserServices';
 
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = 0.0421;
-const LATITUDE = 15.326572;
-const LONGITUDE = -76.157227;
+const LATITUDE = 40.7367;
+const LONGITUDE = -73.9899;
 
 const { width, height } = Dimensions.get("window");
 
