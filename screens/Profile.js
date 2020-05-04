@@ -75,7 +75,7 @@ class Profile extends Component {
     
     tracking = (value) => {
         const user = auth().currentUser;
-        user.gender = 'location'
+        user.gender = user.gender || 'location';
         firestore().collection(user.gender).doc(user.uid).delete().then(() => {
                this.setState({
                    disable:true,

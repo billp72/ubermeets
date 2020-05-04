@@ -52,7 +52,7 @@ class Map extends Component {
         const _this = this;
         const userobj = auth().currentUser;
         const orientation = await this.geofirestore.collection('orientation').doc(userobj.uid).get();
-        userobj.gender = ''//remove
+        userobj.gender = userobj.gender || 'butch'//remove
         this.setState({
             token: userobj.uid,
             gender:userobj.gender,
@@ -92,7 +92,7 @@ class Map extends Component {
             async position => {
                 
                 const { latitude, longitude } = position.coords;
-                
+               
                 const document = await this.GeoCollectionReferenceSet.doc(this.state.token).get();
                 if(document && document.exists){
                   document.ref.update({

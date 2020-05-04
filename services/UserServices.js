@@ -6,18 +6,21 @@ class UserServices {
         const document = firestore().collection('meets_remove').doc(userId);
      
         return new Promise((resolve, reject) => {
-            document.get().then((Response) => {
-                if(Response.exists){
-                    if(Response.data()[location_user_id]){
-                            resolve(true)
+            if(location_user_id != userId){
+                document.get().then((Response) => {
+                    if(Response.exists){
+                        if(Response.data()[location_user_id]){
+                                resolve(true)
+                        }else{
+                                resolve(false)
+                            }
                     }else{
-                            resolve(false)
-                        }
-                }else{
-                        resolve(false);
-                }
-             })
-             
+                            resolve(false);
+                    }
+                })
+            }else{
+                resolve(true)
+            }
         })
     }
 

@@ -66,7 +66,7 @@ export default class LogInPage extends React.Component {
     const _this = this;
     auth().signInWithCredential(auth.FacebookAuthProvider.credential(accessToken)).then(async(result) => {
         //const user = auth().currentUser;
-        result.user.gender = '';//remove
+        result.user.gender = result.user.gender || 'butch';//remove
         const orientation = await firestore().collection('orientation').doc(result.user.uid).get();
 
         if(!orientation.exists){
