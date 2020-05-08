@@ -51,20 +51,20 @@ class Map extends Component {
         this._isMounted = true;
         const _this = this;
         const userobj = auth().currentUser;
-        const orientation = await this.geofirestore.collection('orientation').doc(userobj.uid).get();
-        userobj.gender = userobj.gender || 'butch'//remove
+
         this.setState({
             token: userobj.uid,
             gender:userobj.gender,
-            orientation: orientation.data().orientation
         })
 
-        const userInfo = await firestore().collection('userinfo').doc(this.state.token).get();
+        const userInfo = await firestore().collection('userinfo').doc(userobj.uid).get();
+    
         this.setState({
             name: userInfo.data().name,
             image: userInfo.data().image,
+            orientation: userInfo.data().orientation
         })
-
+     
         if(this.state.orientation === 'straight' && 
            this.state.gender === 'male' ||
            this.state.gender === 'female'){

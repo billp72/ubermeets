@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, Dimensions, Switch } from 'react-native'
+import { StyleSheet, View, Text, Image, Dimensions, Switch, TouchableOpacity } from 'react-native'
 import {facebookService} from '../services/FacebookService'
 import auth from '@react-native-firebase/auth';
 import firestore, {firebase} from '@react-native-firebase/firestore';
@@ -53,10 +53,19 @@ export default class LogInPage extends React.Component {
               value={this.state.toggle}
           />
           <Text>{'\n'}</Text>
-          {facebookService.makeLoginButton((accessToken, url) => {
-            let orientation = this.state.toggle ? 'gay' : 'straight'
-            this.login(accessToken, url, orientation)
-          })}
+          <TouchableOpacity
+              onPress={() => facebookService.makeLoginButton((accessToken, url) => {
+                let orientation = this.state.toggle ? 'gay' : 'straight'
+                this.login(accessToken, url, orientation)
+              })}
+              style={{
+                backgroundColor: 'blue',
+                padding: 16,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text>Log In</Text>
+          </TouchableOpacity>
         </View>
       </React.Fragment>
     )
@@ -65,15 +74,8 @@ export default class LogInPage extends React.Component {
   login(accessToken, url, o) {
     const _this = this;
     auth().signInWithCredential(auth.FacebookAuthProvider.credential(accessToken)).then(async(result) => {
-        //const user = auth().currentUser;
-        result.user.gender = result.user.gender || 'butch';//remove
-        const orientation = await firestore().collection('orientation').doc(result.user.uid).get();
 
-        if(!orientation.exists){
-          orientation.ref.set({
-            orientation: o
-          })
-        }
+        result.user.gender = result.additionalUserInfo.profile.gender || 'butch';//remove
         
         if(o === 'straight' 
           && result.user.gender === 'male' 
