@@ -1,6 +1,7 @@
 import * as types from './ActionTypes';
 import firestore, {firebase} from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import {SendMessage} from '../../../services/SendMessage';
 const FIREBASE_REF_MESSAGES = firestore().collection('chat');
 
 const FIREBASE_REF_MESSAGES_LIMIT = 20
@@ -10,6 +11,7 @@ export const sendMessage = (message, chatkey) => {
     dispatch(chatMessageLoading())
 
     let currentUser = auth().currentUser
+    SendMessage(message, chatkey, currentUser)
     let createdAt = new Date().getTime()
     let chatMessage = {
       text: message,

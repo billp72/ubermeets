@@ -5,7 +5,7 @@ import auth from '@react-native-firebase/auth';
 import firestore, {firebase} from '@react-native-firebase/firestore';
 import Geolocation from '@react-native-community/geolocation';
 import { GeoFirestore } from 'geofirestore';
-//import { ScrollView } from 'react-native-gesture-handler';
+import { requestUserPermission } from '../services/Permission'
 
 export default class LogInPage extends React.Component {
   constructor(props) {
@@ -88,11 +88,14 @@ export default class LogInPage extends React.Component {
           
         const document = await _this.GeoCollectionReferenceSet.doc(result.user.uid).get();
         const userInfo = await firestore().collection('userinfo').doc(result.user.uid).get();
+        const deviceid = await requestUserPermission();
+        //add device id here
         userInfo.ref.set({
           name: result.additionalUserInfo.profile.first_name,
           image: url,
           orientation: o,
-          gender: result.user.gender
+          gender: result.user.gender,
+          deviceID: deviceid
         });
         
         const _watchId = Geolocation.getCurrentPosition((position) => {
@@ -107,7 +110,8 @@ export default class LogInPage extends React.Component {
                     name: result.additionalUserInfo.profile.first_name,
                     image: url,
                     orientation: o,
-                    gender: result.user.gender
+                    gender: result.user.gender,
+                    deviceID: deviceid
                 })
             }
 

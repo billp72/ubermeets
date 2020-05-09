@@ -69,20 +69,21 @@ class UserServices {
     createMeet = async (params) => {
         const document = await firestore().collection('meets').doc(params.id).get();//person cliked in the map
         return new Promise( async (resolve, reject) => {
-            if(document && document.exists){ 
+            if(document && document.exists){ //get the device id
                 const chatKey = params.id + params.from.token; //person you, or someone, clicked in the map does exist
 
                 if(document.data().hasOwnProperty(params.from.token)){//has this person linked you yet?
                     params.chatkey = chatKey;
                     const documentreference1 = firestore().collection('meets').doc(params.id);
 
-                    const targetPerson = {//add or push target person onto your document
+                    const targetPerson = {//add or push target person onto your document. add their deviceID
                         'chatkey': chatKey, 
                         'image':params.from.image,
                         'name':params.from.name,
                         'coordinates':params.from.coordinates,
                         'fromCoordinates':params.coordinates,
-                        'id': params.from.token
+                        'id': params.from.token,
+                        'deviceID': params.from.deviceID
                     }
                     
                     firebase.firestore().runTransaction(transaction => {
@@ -96,7 +97,7 @@ class UserServices {
                                     transaction.update(documentreference1, {'data': d})
                                 }
                             })
-                    }).then(() => {//then add or push yourself onto the target persons document
+                    }).then(() => {//then add or push yourself onto the target persons document. Add my deviceID
                             
                                 const documentreference2 = firestore().collection('meets').doc(params.from.token); 
                                 
@@ -106,7 +107,8 @@ class UserServices {
                                     'name':params.name, 
                                     'coordinates':params.coordinates,
                                     'fromCoordinates':params.from.coordinates,
-                                    'id':params.id
+                                    'id':params.id,
+                                    'deviceID':params.deviceID
                                 }
 
                                 firebase.firestore().runTransaction(transaction => {

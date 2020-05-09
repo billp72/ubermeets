@@ -12,7 +12,7 @@ const MessageRowComponent = props => {
   const isCurrentUser = props.isCurrentUser
   const alignItems = isCurrentUser ? 'flex-end' : 'flex-start'
   const margin = isCurrentUser ? 
-  {marginLeft: MESSAGE_TEXT_MARGIN, backgroundColor: '#1E90FF'} : 
+  {marginLeft: MESSAGE_TEXT_MARGIN, backgroundColor: '#7abaf9'} : 
   {marginRight: MESSAGE_TEXT_MARGIN, backgroundColor: '#dcdcdc'}
   const username = isCurrentUser ? 'you' : props.message.user.name
   const date = relativeDate(new Date(props.message.createdAt))

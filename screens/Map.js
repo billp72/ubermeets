@@ -58,11 +58,12 @@ class Map extends Component {
             gender:userobj.gender,
             orientation: orientation.data().orientation
         })
-
+       
         const userInfo = await firestore().collection('userinfo').doc(this.state.token).get();
         this.setState({
             name: userInfo.data().name,
             image: userInfo.data().image,
+            deviceID: userInfo.data().deviceID
         })
 
         if(this.state.orientation === 'straight' && 
@@ -199,7 +200,8 @@ class Map extends Component {
                   name: userInfo.data().name,
                   image: userInfo.data().image,
                   orientation: userInfo.data().orientation,
-                  gender: userInfo.data().gender
+                  gender: userInfo.data().gender,
+                  deviceID: userInfo.data().deviceID
               })
            }
            const GeoQuery = this.GeoCollectionReference.near(
@@ -238,13 +240,14 @@ class Map extends Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
     });
-
+    //send device id
     tinderScreen = (data) => {
         data.from = {
             token: this.state.token,
             name: this.state.name,
             coordinates: new firestore.GeoPoint(this.state.latitude, this.state.longitude),
-            image: this.state.image
+            image: this.state.image,
+            deviceID: this.state.deviceID
         }
         this.props.navigation.navigate('Meet', data);
     }
