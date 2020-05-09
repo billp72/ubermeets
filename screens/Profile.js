@@ -1,7 +1,7 @@
 'use-strict'
 import React, { Component } from 'react'
 import {
-    Text, StyleSheet, View, Image, Switch
+    Text, StyleSheet, View, Image, Switch,TouchableOpacity
 } from 'react-native'
 import { facebookService } from '../services/FacebookService';
 import firestore, {firebase} from '@react-native-firebase/firestore';
@@ -40,10 +40,11 @@ class Profile extends Component {
 
     componentDidMount(){
        const user = auth().currentUser;
-       user.gender = 'location'//remove
        this.props.navigation.addListener('willFocus', async (route) => { 
             if(route.state.routeName == 'Profile'){ 
-                const document = await this.geofirestore.collection(user.gender).doc(user.uid).get();
+                const orientation = await firestore().collection('userinfo').doc(user.uid).get()
+                const bucket = orientation.data().orientation === 'gay' ? 'location' : user.gender;
+                const document = await this.geofirestore.collection(bucket).doc(user.uid).get();
                 if(document && document.exists){
                     console.log('ON')
                     this.setState({
@@ -73,10 +74,11 @@ class Profile extends Component {
         })         
     }
     
-    tracking = (value) => {
+    tracking = async (value) => {
         const user = auth().currentUser;
-        user.gender = user.gender || 'location';
-        firestore().collection(user.gender).doc(user.uid).delete().then(() => {
+        const orientation = await firestore().collection('userinfo').doc(user.uid).get()
+        const bucket = orientation.data().orientation === 'gay' ? 'location' : user.gender;
+        firestore().collection(bucket).doc(user.uid).delete().then(() => {
                this.setState({
                    disable:true,
                    toggle:value
@@ -114,36 +116,41 @@ class Profile extends Component {
                     value={this.state.toggle}
                 />
                 <Text>{'\n'}</Text>
-                {facebookService.makeLogoutButton((accessToken) => {
-                    this.logout()
-                })}
+                <TouchableOpacity
+                    onPress={() => facebookService.makeLogoutButton((accessToken) => {
+                        this.logout()
+                    })}
+                    style={{
+                        backgroundColor: 'blue',
+                        padding: 16,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <Text>Log Out</Text>
+                </TouchableOpacity>
             </View>
           </React.Fragment>
         )
     }
 
-    logout() {
+   async logout() {
         const _this = this;
-        this.state = {
-            owner: null,
-            picture: null
-        }
-        const unsubscribe = auth().onAuthStateChanged( async (user) => {
-            let u = user.toJSON();
-            u.gender = '';//remove
-            const orientation = await firestore().collection("orientation").doc(u.uid).get();
-            let bucket = orientation.data().orientation === 'gay' || u.gender !== 'male' && u.gender !== 'female' 
-                ? 'location' : u.gender;
-            firestore().collection(bucket).doc(u.uid).delete().then(function() {
-                _this.props.navigation.navigate('LoginNav');
-                unsubscribe();
-            }).catch(function(error) {
-                unsubscribe();
-                console.error("Error removing document: ", error);
-            });
-        })
-        
-      }
+        const user = auth().currentUser;
+        const orientation = await firestore().collection("userinfo").doc(user.uid).get();
+        let bucket = orientation.data().orientation === 'gay' ? 'location' : user.gender;
+        firestore().collection(bucket).doc(user.uid).delete().then(() => {
+            _this.props.navigation.navigate('LoginNav');
+            _this.state = {
+                owner: null,
+                picture: null,
+                disable:null,
+                toggle:null
+            }
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+    }
 }
 
 export default Profile;
