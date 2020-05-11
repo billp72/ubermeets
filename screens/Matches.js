@@ -5,6 +5,8 @@ import {
 } from 'react-native'
 import auth from '@react-native-firebase/auth';
 import firestore, {firebase} from '@react-native-firebase/firestore';
+const emitter = require('tiny-emitter/instance');
+
 const FIREBASE_REF_MESSAGES = firestore().collection('chat');
 const FIREBASE_REF_MEET = firestore().collection('meets');
 
@@ -17,7 +19,6 @@ class Matches extends Component {
     constructor(props){
         super(props)
         this.state = {}
-        this.unsubscribe;
         this.animation = new Animated.Value(0);
         this.none = '';
     }
@@ -25,7 +26,7 @@ class Matches extends Component {
     componentDidMount(){
 
         this.unsubscribe = auth().onAuthStateChanged((user) => {
-            let ur = user.toJSON();
+            let ur = user
             this.setState({
                 id: ur.uid
             })
@@ -40,7 +41,29 @@ class Matches extends Component {
                    })
             }).bind(this); 
         });
-        
+
+        emitter.once('message', this.getMessages, this);
+    }
+
+    getMessages(params){
+    
+        if(params){
+            if(params.notification.hasOwnProperty('android')){
+                Alert.alert(params.notification.title)
+            }else if(params.notification.hasOwnProperty('android')){
+                Alert.alert(params.notification.title)
+            }
+         
+        }
+    }
+
+    parseObject(str){
+        try{
+            var obj = JSON.parse(str);
+            return obj;
+        } catch(e){
+            return {};
+        }
     }
 
     componentWillUnmount() {
@@ -53,6 +76,7 @@ class Matches extends Component {
     };
 
     chat = (user) => {
+
         this.props.navigation.navigate('Chat', user);
     }
 
@@ -80,12 +104,11 @@ class Matches extends Component {
             FIREBASE_REF_MEET.doc(user.id).set({'data':data})
         });
 
-        const id = auth().currentUser.uid;
-        FIREBASE_REF_MEET.doc(id).get().then((res2) => {
+        FIREBASE_REF_MEET.doc(this.state.id).get().then((res2) => {
             res2.get('data').forEach((c, i) => {
                 if(c.chatkey == user.chatkey){
                     const data = res2.get('data').splice(1, i);
-                    FIREBASE_REF_MEET.doc(id).set({'data':data})
+                    FIREBASE_REF_MEET.doc(this.state.id).set({'data':data})
                 }
             })
         })
@@ -94,9 +117,9 @@ class Matches extends Component {
     }
 
     render() {
+
       return (
-        <View style={styles.container}>      
-           
+        <View style={styles.container}>       
             <Animated.ScrollView
                 vertical
                 scrollEventThrottle={1}
@@ -118,6 +141,7 @@ class Matches extends Component {
                 contentContainerStyle={styles.endPadding}
                 >
                 {this.state.data && this.state.data.map((user, index) => (
+                    
                     <View style={styles.card} key={index}>
                         <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
                             onPress={(e) => {e.stopPropagation(); this.chat(user)}}>

@@ -8,7 +8,13 @@ export function SendMessage (message, chatkey, currentUser) {
         const data = snapShot.data();
          data.data.map((d) => {
             if(d.chatkey === chatkey){
-                console.log(d)
+                d.message = message;
+                fetch('https://uber-meets.herokuapp.com/message', {
+                    method: 'post',
+                    body: JSON.stringify(d)
+                }).then(function(response) {
+                    return response.json();
+                })  
             }
         })
     })

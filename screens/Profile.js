@@ -43,7 +43,8 @@ class Profile extends Component {
        this.props.navigation.addListener('willFocus', async (route) => { 
             if(route.state.routeName == 'Profile'){ 
                 const orientation = await firestore().collection('userinfo').doc(user.uid).get()
-                const bucket = orientation.data().orientation === 'gay' ? 'location' : user.gender;
+                const bucket = orientation.data().orientation === 'gay' ? 'location' : orientation.data().gender;
+         
                 const document = await this.geofirestore.collection(bucket).doc(user.uid).get();
                 if(document && document.exists){
                     console.log('ON')
@@ -77,7 +78,7 @@ class Profile extends Component {
     tracking = async (value) => {
         const user = auth().currentUser;
         const orientation = await firestore().collection('userinfo').doc(user.uid).get()
-        const bucket = orientation.data().orientation === 'gay' ? 'location' : user.gender;
+        const bucket = orientation.data().orientation === 'gay' ? 'location' : orientation.data().gender;
         firestore().collection(bucket).doc(user.uid).delete().then(() => {
                this.setState({
                    disable:true,
@@ -85,7 +86,7 @@ class Profile extends Component {
                 })
         }).catch(function(error) {
                 console.error("Error removing document: ", error);
-        });      
+        });   
     }
 
     static navigationOptions = {
@@ -138,7 +139,7 @@ class Profile extends Component {
         const _this = this;
         const user = auth().currentUser;
         const orientation = await firestore().collection("userinfo").doc(user.uid).get();
-        let bucket = orientation.data().orientation === 'gay' ? 'location' : user.gender;
+        let bucket = orientation.data().orientation === 'gay' ? 'location' : orientation.data().gender;
         firestore().collection(bucket).doc(user.uid).delete().then(() => {
             _this.props.navigation.navigate('LoginNav');
             _this.state = {

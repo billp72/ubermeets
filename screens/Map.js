@@ -53,8 +53,7 @@ class Map extends Component {
         const userobj = auth().currentUser;
 
         this.setState({
-            token: userobj.uid,
-            gender:userobj.gender,
+            token: userobj.uid
         })
 
         const userInfo = await firestore().collection('userinfo').doc(userobj.uid).get();
@@ -62,9 +61,10 @@ class Map extends Component {
         this.setState({
             name: userInfo.data().name,
             image: userInfo.data().image,
-            orientation: userInfo.data().orientation
+            orientation: userInfo.data().orientation,
+            gender: userInfo.data().gender
         })
-     
+  
         if(this.state.orientation === 'straight' && 
            this.state.gender === 'male' ||
            this.state.gender === 'female'){
