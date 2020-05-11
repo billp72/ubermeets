@@ -20,13 +20,15 @@ export default class LogInPage extends React.Component {
     }   
   }
 
- async componentDidMount(){
+ componentDidMount(){
+    /*
+    landscape orientation is currrently turned off - not using this
     Dimensions.addEventListener('change',(dimensions) => {
       this.setState({
         imageHeight: Math.round(dimensions.window.width >= 800 ? 
           dimensions.window.width / 16 : dimensions.window.width - 50),
       })
-    })
+    })*/
  }
 
  setOrientation = (value) => {
@@ -59,12 +61,12 @@ export default class LogInPage extends React.Component {
                 this.login(accessToken, url, orientation)
               })}
               style={{
-                backgroundColor: 'blue',
+                backgroundColor: '#3b5998',
                 padding: 16,
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Text>Log In</Text>
+              <Text style={{color: 'white', fontWeight:'bold'}}>Log In</Text>
           </TouchableOpacity>
         </View>
       </React.Fragment>

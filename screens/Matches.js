@@ -20,7 +20,6 @@ class Matches extends Component {
         super(props)
         this.state = {}
         this.animation = new Animated.Value(0);
-        this.none = '';
     }
 
     componentDidMount(){
@@ -46,14 +45,15 @@ class Matches extends Component {
     }
 
     getMessages(params){
-    
         if(params){
-            if(params.notification.hasOwnProperty('android')){
-                Alert.alert(params.notification.title)
-            }else if(params.notification.hasOwnProperty('android')){
-                Alert.alert(params.notification.title)
-            }
-         
+            this.state.data.map((user, index) => {
+                if(user.id === params.data.id){
+                    this.state.data[index].msg = true;
+                }
+            })
+            this.setState({
+                ...this.state.data
+            })
         }
     }
 
@@ -75,9 +75,14 @@ class Matches extends Component {
         swipeEnabled: false
     };
 
-    chat = (user) => {
-
-        this.props.navigation.navigate('Chat', user);
+    chat = (user, index) => {
+        if(user.msg){
+            this.state.data[index].msg = false;
+            this.setState({
+                ...this.state.data
+            })
+        }
+        this.props.navigation.navigate('Chat', user);  
     }
 
     remove = (user, index) => {
@@ -142,9 +147,9 @@ class Matches extends Component {
                 >
                 {this.state.data && this.state.data.map((user, index) => (
                     
-                    <View style={styles.card} key={index}>
+                    <View style={[styles.card, user.msg ? {backgroundColor:'#ced3ee'} : {backgroundColor:'#FFF'}]} key={index}>
                         <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
-                            onPress={(e) => {e.stopPropagation(); this.chat(user)}}>
+                            onPress={(e) => {e.stopPropagation(); this.chat(user,index)}}>
                                 <Text 
                                     numberOfLines={1} 
                                     style={styles.cardtitle}>

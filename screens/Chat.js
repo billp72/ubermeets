@@ -14,10 +14,6 @@ class Chat extends Component {
      super(props);
   }
 
-  componentDidMount(){
-   emitter.off('message', () => {})
-  }
-
    render(){
       
      const { params: {chatkey, image, name} } = this.props.navigation.state;

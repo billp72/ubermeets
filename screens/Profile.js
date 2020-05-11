@@ -122,13 +122,13 @@ class Profile extends Component {
                         this.logout()
                     })}
                     style={{
-                        backgroundColor: 'blue',
+                        backgroundColor: '#3b5998',
                         padding: 16,
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}
                 >
-                    <Text>Log Out</Text>
+                    <Text style={{color: 'white', fontWeight:'bold'}}>Log Out</Text>
                 </TouchableOpacity>
             </View>
           </React.Fragment>
