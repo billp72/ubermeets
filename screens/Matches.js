@@ -57,15 +57,6 @@ class Matches extends Component {
         }
     }
 
-    parseObject(str){
-        try{
-            var obj = JSON.parse(str);
-            return obj;
-        } catch(e){
-            return {};
-        }
-    }
-
     componentWillUnmount() {
         this.unsubscribe();
         this.state.fireUnsubscribe();
