@@ -8,23 +8,6 @@ import firestore, {firebase} from '@react-native-firebase/firestore';
 import { GeoFirestore } from 'geofirestore';
 import auth from '@react-native-firebase/auth';
 
-const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1
-    },
-    imageStyle: {
-        width: 200,
-        height: 300,
-        resizeMode: 'contain',
-    },
-    testSize: {
-        fontSize: 30,
-        fontWeight: "bold"
-    }
-});
-
 class Profile extends Component {
     constructor(props){
         super(props)
@@ -153,5 +136,22 @@ class Profile extends Component {
         });
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    },
+    imageStyle: {
+        width: 200,
+        height: 300,
+        resizeMode: 'contain',
+    },
+    testSize: {
+        fontSize: 30,
+        fontWeight: "bold"
+    }
+});
 
 export default Profile;
