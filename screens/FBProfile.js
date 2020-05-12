@@ -26,11 +26,15 @@ class FBProfile extends Component {
                 <Image 
                     source={{uri:params.image}}
                     style={styles.image}
+                    resizeMode='cover'
                 />
-                <Text style={{fontSize:25}}>{params.name}</Text>
+                <View style={styles.info}>
+                    <Text style={{fontSize:22,fontWeight:"bold"}}>{params.name}</Text> 
+                    <Text style={{fontSize:18,fontWeight:"bold", color:"gray"}}>orientation: {params.orientation}</Text>
+                </View>
             </View>
             <Footer
-                leftComponent={{ icon: 'home', color: '#fff', 
+                centerComponent={{ icon: 'home', color: '#fff', 
                 'onPress': () => this.props.navigation.navigate('Chat', params), size:36}}
                  containerStyle={{
                     backgroundColor: '#3D6DCC',
@@ -50,9 +54,19 @@ const styles = StyleSheet.create({
         flex: 1
     },
     image: {
-        width:'70%',
-        height:'70%'
-    }
+        position:"absolute",
+        top: 0,
+        width:'100%',
+        height:'80%'
+    },
+    info: {
+        display:"flex",
+        width:"90%",
+        flexDirection: "column",
+        justifyContent:"space-between",
+        position:"absolute",
+        bottom:100,
+    },
 });
 
 export default FBProfile;

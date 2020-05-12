@@ -80,6 +80,7 @@ class UserServices {
                         'chatkey': chatKey, 
                         'image':params.from.image,
                         'name':params.from.name,
+                        'orientation':params.from.orientation,
                         'coordinates':params.from.coordinates,
                         'fromCoordinates':params.coordinates,
                         'id': params.from.token,
@@ -104,7 +105,8 @@ class UserServices {
                                 const user = {
                                     'chatkey':chatKey,
                                     'image': params.image, 
-                                    'name':params.name, 
+                                    'name':params.name,
+                                    'orientation':params.orientation, 
                                     'coordinates':params.coordinates,
                                     'fromCoordinates':params.from.coordinates,
                                     'id':params.id,

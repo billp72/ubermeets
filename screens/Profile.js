@@ -87,7 +87,7 @@ class Profile extends Component {
                         style={styles.imageStyle}
                     />
                 ) : null} 
-                <Text style={{padding:10}}>When tracking is Off, reacquire by going to the Map tab</Text>
+                <Text style={{padding:10}}>When tracking is Off, reacquire by going to the MAP tab</Text>
                 <Text style={{fontWeight:'700', fontSize:20}}>{this.state.toggle?'Tracking Off':'Tracking On'}</Text>
                 <Text>{'\n'}</Text>
                 <Switch

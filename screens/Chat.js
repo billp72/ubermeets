@@ -16,10 +16,11 @@ class Chat extends Component {
 
    render(){
       
-     const { params: {chatkey, image, name} } = this.props.navigation.state;
+     const { params: {chatkey, image, name, orientation} } = this.props.navigation.state;
+
       return (
          <Provider store={store}>
-            <ChatApp navigation={this.props.navigation} chatkey={chatkey} image={image} name={name} />
+            <ChatApp navigation={this.props.navigation} chatkey={chatkey} image={image} name={name} orientation={orientation} />
          </Provider>
       )
    }

@@ -1,7 +1,7 @@
 'use strict'
 import React, {Component} from 'react'
 import {
-    Text, Button, StyleSheet, View
+    Text, TouchableHighlight, StyleSheet, View
 } from 'react-native'
 import PropTypes from "prop-types";
 
@@ -17,8 +17,16 @@ class Buttons extends Component {
 
         return (
           <View style={styles.container}>
-             <View style={styles.btn}><Button color="#841584" title={btn1} onPress={btn1Func} /></View>
-             <View style={styles.btn}><Button color="#841584" title={btn2} onPress={btn2Func} /></View>
+             <View>
+                 <TouchableHighlight style={styles.btn} activeOpacity={0.4} underlayColor="#F5F5F5" onPress={btn1Func}>
+                     <Text>{btn1}</Text>
+                </TouchableHighlight>
+            </View>
+             <View>
+                 <TouchableHighlight style={styles.btn} activeOpacity={0.4} underlayColor="#F5F5F5" onPress={btn2Func}>
+                     <Text>{btn2}</Text>
+                </TouchableHighlight>
+            </View>
           </View>
         )
     }
@@ -26,13 +34,17 @@ class Buttons extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        width:"90%",
         flexDirection: 'row',
         justifyContent: 'space-between',
         flex: 1
     },
     btn: {
-        width:'50%',
-        height:'1%'
+        width:"100%",
+        backgroundColor:"white",
+        padding:10,
+        borderRadius: 10,
+        borderWidth: 1,
     }
 });
 
