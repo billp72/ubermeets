@@ -145,7 +145,7 @@ class Matches extends Component {
                 style={styles.scrollView}
                 contentContainerStyle={styles.endPadding}
                 >
-                {this.state.data && this.state.data.map((user, index) => (
+                {(this.state.data || []).map((user, index) => (
                     
                     <View style={[styles.card, user.msg ? {backgroundColor:'#ced3ee'} : {backgroundColor:'#FFF'}]} key={index}>
                         <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
