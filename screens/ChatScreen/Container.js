@@ -10,7 +10,8 @@ class ChatScreenContainer extends Component {
         chatkey={this.props.chatkey} 
         image={this.props.image} 
         name={this.props.name}
-        orientation={this.props.orientation} />
+        orientation={this.props.orientation}
+        birthday={this.props.birthday} />
     )
   }
 }

@@ -1,11 +1,12 @@
 'use strict'
 import React, { Component } from 'react'
 import {
-    Text, StyleSheet, View, Image, Button
+    Text, StyleSheet, View, Image
 } from 'react-native';
 import Buttons from '../Components/Buttons';
 import Footer from '../Components/Footer';
 import { userServices } from '../services/UserServices';
+import { dateToAge } from '../services/Helpers';
 
 class Meet extends Component {
     constructor(props){
@@ -50,8 +51,8 @@ class Meet extends Component {
                     resizeMode='cover'
                 />
                 <View style={styles.info}>
-                    <Text style={{fontSize:22,fontWeight:"bold"}}>{params.name}</Text> 
-                    <Text style={{fontSize:18,fontWeight:"bold", color:"gray"}}>orientation: {params.orientation}</Text>
+                    <Text style={{fontSize:22,fontWeight:"bold"}}>{params.name}</Text>
+                    <Text style={{fontSize:18,fontWeight:"bold", color:"gray"}}>age: {dateToAge(params.birthday)}</Text>
                 </View>
             </View>
             

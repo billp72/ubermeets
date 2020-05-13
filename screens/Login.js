@@ -77,7 +77,8 @@ export default class LogInPage extends React.Component {
     const _this = this;
     auth().signInWithCredential(auth.FacebookAuthProvider.credential(accessToken)).then(async(result) => {
 
-        result.user.gender = result.additionalUserInfo.profile.gender || 'butch';//remove
+        result.user.gender = result.additionalUserInfo.profile.gender || 'butch';
+        result.user.birthday = result.additionalUserInfo.profile.birthday;
         
         if(o === 'straight' 
           && result.user.gender === 'male' 
@@ -96,6 +97,7 @@ export default class LogInPage extends React.Component {
         //add device id here
         userInfo.ref.set({
           name: result.additionalUserInfo.profile.first_name,
+          birthday: result.user.birthday,
           image: url,
           orientation: o,
           gender: result.user.gender,
@@ -112,6 +114,7 @@ export default class LogInPage extends React.Component {
                 document.ref.set({
                     coordinates: new firestore.GeoPoint(position.coords.latitude, position.coords.longitude),
                     name: result.additionalUserInfo.profile.first_name,
+                    birthday: result.user.birthday,
                     image: url,
                     orientation: o,
                     gender: result.user.gender,

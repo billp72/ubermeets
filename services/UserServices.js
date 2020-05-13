@@ -84,7 +84,8 @@ class UserServices {
                         'coordinates':params.from.coordinates,
                         'fromCoordinates':params.coordinates,
                         'id': params.from.token,
-                        'deviceID': params.from.deviceID
+                        'deviceID': params.from.deviceID,
+                        'birthday': params.from.birthday
                     }
                     
                     firebase.firestore().runTransaction(transaction => {
@@ -110,7 +111,8 @@ class UserServices {
                                     'coordinates':params.coordinates,
                                     'fromCoordinates':params.from.coordinates,
                                     'id':params.id,
-                                    'deviceID':params.deviceID
+                                    'deviceID':params.deviceID,
+                                    'birthday':params.birthday
                                 }
 
                                 firebase.firestore().runTransaction(transaction => {

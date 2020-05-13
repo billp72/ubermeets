@@ -3,9 +3,8 @@ import React, { Component } from 'react'
 import {
     Text, StyleSheet, View, Image, Button
 } from 'react-native';
-import Buttons from '../Components/Buttons';
 import Footer from '../Components/Footer';
-import { userServices } from '../services/UserServices';
+import { dateToAge } from '../services/Helpers';
 
 class FBProfile extends Component {
     constructor(props){
@@ -30,7 +29,7 @@ class FBProfile extends Component {
                 />
                 <View style={styles.info}>
                     <Text style={{fontSize:22,fontWeight:"bold"}}>{params.name}</Text> 
-                    <Text style={{fontSize:18,fontWeight:"bold", color:"gray"}}>orientation: {params.orientation}</Text>
+                    <Text style={{fontSize:18,fontWeight:"bold", color:"gray"}}>age: {dateToAge(params.birthday)}</Text>
                 </View>
             </View>
             <Footer

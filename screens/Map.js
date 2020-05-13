@@ -200,7 +200,8 @@ class Map extends Component {
                   image: userInfo.data().image,
                   orientation: userInfo.data().orientation,
                   gender: userInfo.data().gender,
-                  deviceID: userInfo.data().deviceID
+                  deviceID: userInfo.data().deviceID,
+                  birthday: userInfo.data().birthday
               })
            }
            const GeoQuery = this.GeoCollectionReference.near(
