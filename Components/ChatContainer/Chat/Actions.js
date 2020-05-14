@@ -6,12 +6,11 @@ const FIREBASE_REF_MESSAGES = firestore().collection('chat');
 
 const FIREBASE_REF_MESSAGES_LIMIT = 20
 
-export const sendMessage = (message, chatkey) => {
+export const sendMessage = (message, chatkey, index) => {
   return (dispatch) => {
     dispatch(chatMessageLoading())
-
     let currentUser = auth().currentUser
-    SendMessage(message, chatkey, currentUser)
+    SendMessage(message, chatkey, currentUser, index)
     let createdAt = new Date().getTime()
     let chatMessage = {
       text: message,

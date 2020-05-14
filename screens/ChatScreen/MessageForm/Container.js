@@ -14,7 +14,8 @@ const MessageFormContainer = props =>
     updateMessage={props.updateMessage}
     message={props.message}
     sendingError={props.sendingError}
-    chatkey={props.chatkey} />
+    chatkey={props.chatkey}
+    index={props.index} />
 
 const mapStateToProps = state => ({
   sending: state.chat.sending,

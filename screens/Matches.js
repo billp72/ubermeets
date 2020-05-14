@@ -46,11 +46,10 @@ class Matches extends Component {
 
     getMessages(params){
         if(params){
-            this.state.data.map((user, index) => {
-                if(user.id === params.data.id){
-                    this.state.data[index].msg = true;
-                }
-            })
+            
+            let index = parseInt(params.data.index);
+            this.state.data[index].msg = true;
+            
             this.setState({
                 ...this.state.data
             })
@@ -67,6 +66,7 @@ class Matches extends Component {
     };
 
     chat = (user, index) => {
+        user.index = index;
         if(user.msg){
             this.state.data[index].msg = false;
             this.setState({

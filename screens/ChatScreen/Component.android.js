@@ -16,7 +16,7 @@ class ChatScreenComponent extends Component {
     return (
       <View style={styles.container}>
         <MessagesList chatkey={this.props.chatkey} />
-        <MessageForm chatkey={this.props.chatkey} />
+        <MessageForm chatkey={this.props.chatkey} index={this.props.index} />
         <Footer leftComponent={{ icon: 'home', color: '#fff', 
                 'onPress': () => this.props.navigation.navigate('Matches'), size:36}}
                 rightComponent={<ChatImage 
