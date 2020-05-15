@@ -45,9 +45,13 @@ class Matches extends Component {
     }
 
     getMessages(params){
+        let index;
         if(params){
-            
-            let index = parseInt(params.data.index);
+            if(isNaN(parseInt(params.data.index))){
+                index = this.state.data.length - 1;
+            }else{
+                index = parseInt(params.data.index);
+            }
             this.state.data[index].msg = true;
             
             this.setState({
