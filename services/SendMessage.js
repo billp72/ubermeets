@@ -10,6 +10,8 @@ export function SendMessage (message, chatkey, currentUser, index) {
             if(d.chatkey === chatkey){
                 d.message = message;
                 d.index = `${index}`;
+                d.myid = currentUser.uid;
+                d.displayName = currentUser.displayName;
                 fetch('https://uber-meets.herokuapp.com/message', {
                     method: 'post',
                     body: JSON.stringify(d)
