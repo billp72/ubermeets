@@ -62,7 +62,8 @@ class Map extends Component {
             name: userInfo.data().name,
             image: userInfo.data().image,
             orientation: userInfo.data().orientation,
-            gender: userInfo.data().gender
+            gender: userInfo.data().gender,
+            deviceID: userInfo.data().deviceID
         })
   
         if(this.state.orientation === 'straight' && 

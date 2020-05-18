@@ -95,6 +95,12 @@ class Matches extends Component {
           )
     }
 
+    noMatches = (data) => {
+        if(!data || data.length == 0){
+            return <Text>No matches</Text>
+        }
+    }
+
     removed = (user, index) => {
         FIREBASE_REF_MEET.doc(user.id).get().then((res) => {
             const data = res.get('data').splice(1, index)
@@ -116,7 +122,8 @@ class Matches extends Component {
     render() {
 
       return (
-        <View style={styles.container}>       
+        <View style={styles.container}>
+            {this.noMatches(this.state.data)}     
             <Animated.ScrollView
                 vertical
                 scrollEventThrottle={1}
