@@ -104,7 +104,7 @@ class Map extends Component {
                 const GeoQuery = this.GeoCollectionReference.near(
                     { 
                      center: new firestore.GeoPoint(position.coords.latitude,
-                     position.coords.longitude), radius: 150 
+                     position.coords.longitude), radius: 10 
                     });
                 
                  GeoQuery.get().then((GeoQuerySnapshot) => {
@@ -208,7 +208,7 @@ class Map extends Component {
            const GeoQuery = this.GeoCollectionReference.near(
               { 
                center: new firestore.GeoPoint(position.coords.latitude,
-               position.coords.longitude), radius: 150 
+               position.coords.longitude), radius: 10 
             });
 
             GeoQuery.get().then((GeoQuerySnapshot) => {
