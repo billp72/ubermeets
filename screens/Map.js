@@ -63,7 +63,8 @@ class Map extends Component {
             image: userInfo.data().image,
             orientation: userInfo.data().orientation,
             gender: userInfo.data().gender,
-            deviceID: userInfo.data().deviceID
+            deviceID: userInfo.data().deviceID,
+            birthday: userInfo.data().birthday
         })
   
         if(this.state.orientation === 'straight' && 
@@ -248,7 +249,9 @@ class Map extends Component {
             name: this.state.name,
             coordinates: new firestore.GeoPoint(this.state.latitude, this.state.longitude),
             image: this.state.image,
-            deviceID: this.state.deviceID
+            deviceID: this.state.deviceID,
+            orientation: this.state.orientation,
+            birthday: this.state.birthday
         }
         this.props.navigation.navigate('Meet', data);
     }
