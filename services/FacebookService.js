@@ -38,7 +38,7 @@ class FacebookService {
   async fetchProfile(callback) {
     const PROFILE_REQUEST_PARAMS = {
       fields: {
-        string: 'id,picture.type(large),name,gender',
+        string: 'id,picture.type(large),name,gender,birthday',
       },
     };
     return new Promise((resolve, reject) => {

@@ -49,7 +49,9 @@ class Profile extends Component {
             async response => {
                 this.setState({
                     owner: response.name,
-                    picture: response.picture.data.url
+                    picture: response.picture.data.url,
+                    birthday: response.birthday,
+                    gender: response.gender 
                 })
             }
         )
@@ -81,13 +83,15 @@ class Profile extends Component {
           <React.Fragment>
             <View style={styles.container}>
                 <Text style={styles.testSize}>{this.state.owner}</Text>
+                <Text>Birthday: <Text style={{fontWeight:'700'}}>{this.state.birthday}</Text></Text>
+                <Text>Gender: <Text style={{fontWeight:'700'}}>{this.state.gender}</Text></Text>
                 {this.state.picture ? (
                     <Image
                         source={{ uri: this.state.picture }}
                         style={styles.imageStyle}
                     />
                 ) : null} 
-                <Text style={{padding:10}}>When tracking is Off, reacquire by going to the MAP tab</Text>
+                <Text style={{padding:10}}>reacquire tracking by going to the MAP tab</Text>
                 <Text style={{fontWeight:'700', fontSize:20}}>{this.state.toggle?'Tracking Off':'Tracking On'}</Text>
                 <Text>{'\n'}</Text>
                 <Switch
