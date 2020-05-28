@@ -100,8 +100,8 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
-
+def enableProguardInReleaseBuilds = true
+def shrinkEnabled = true
 /**
  * The preferred build flavor of JavaScriptCore.
  *
@@ -136,8 +136,8 @@ android {
         applicationId "com.ubermeets"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 9
-        versionName "6.0"
+        versionCode 10
+        versionName "1.1"
         multiDexEnabled true
     }
     splits {
@@ -171,6 +171,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
+            shrinkResources shrinkEnabled
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
