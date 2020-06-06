@@ -61,5 +61,5 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
-# /ios/UberMeets/GoogleService-Info.plist
+/ios/UberMeets/GoogleService-Info.plist
 android/gradle.properties
