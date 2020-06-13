@@ -138,16 +138,14 @@ class UserServices {
                     });
 
                 }else{
-                    //console.log("document but no prop")
-                    const add = await firestore().collection('meets').doc(params.id).get();
+                    const add = await firestore().collection('meets').doc(params.from.token).get();
                     add.ref.update({
-                        [`${params.from.token}`]: false //the person of desire has a document but you haven't been linked yet (create link)
+                        [`${params.id}`]: false //the person of desire has a document but you haven't been linked yet (create link)
                     });
 
                     resolve(false)
                 }
             }else{
-                //console.log('add document')
                 const add = await firestore().collection('meets').doc(params.from.token).get();
                 add.ref.set({
                     [`${params.id}`]: false //person you're wishing to meet has no document and no link (create document and link)
