@@ -1,5 +1,5 @@
 import firestore, {firebase} from '@react-native-firebase/firestore';
-
+import {SendMessageMeet} from './SendMessage';
 class UserServices {
     
     async checkUser(location_user_id, userId) {
@@ -68,14 +68,14 @@ class UserServices {
  
     createMeet = async (params) => {
         const document = await firestore().collection('meets').doc(params.id).get();//person cliked in the map
-        return new Promise( async (resolve, reject) => {
+        const add = await firestore().collection('meets').doc(params.from.token).get();
+        return new Promise((resolve, reject) => {
             if(document && document.exists){ //get the device id
                 const chatKey = params.id + params.from.token; //person you, or someone, clicked in the map does exist
 
                 if(document.data().hasOwnProperty(params.from.token)){//has this person linked you yet?
                     params.chatkey = chatKey;
                     const documentreference1 = firestore().collection('meets').doc(params.id);
-
                     const targetPerson = {//add or push target person onto your document. add their deviceID
                         'chatkey': chatKey, 
                         'image':params.from.image,
@@ -88,57 +88,51 @@ class UserServices {
                         'birthday': params.from.birthday
                     }
                     
-                    firebase.firestore().runTransaction(transaction => {
-                            
-                            return transaction.get(documentreference1).then((doc) => {
-                                if(!doc.data() || doc.data() && !doc.data().hasOwnProperty('data')){
-                                    transaction.set(documentreference1,{'data': [targetPerson]})
-                                }else{
-                                    const d = doc.data().data;
-                                    d.push(targetPerson);
-                                    transaction.update(documentreference1, {'data': d})
-                                }
-                            })
+                    firebase.firestore().runTransaction(transaction => {  
+                        return transaction.get(documentreference1).then((doc) => {
+                            if(!doc.data() || doc.data() && !doc.data().hasOwnProperty('data')){
+                                transaction.set(documentreference1,{'data': [targetPerson]})
+                            }else{
+                                const d = doc.data().data;
+                                d.push(targetPerson);
+                                transaction.update(documentreference1, {'data': d})
+                            }
+                        })
                     }).then(() => {//then add or push yourself onto the target persons document. Add my deviceID
-                            
-                                const documentreference2 = firestore().collection('meets').doc(params.from.token); 
-                                
-                                const user = {
-                                    'chatkey':chatKey,
-                                    'image': params.image, 
-                                    'name':params.name,
-                                    'orientation':params.orientation, 
-                                    'coordinates':params.coordinates,
-                                    'fromCoordinates':params.from.coordinates,
-                                    'id':params.id,
-                                    'deviceID':params.deviceID,
-                                    'birthday':params.birthday
+                        const documentreference2 = firestore().collection('meets').doc(params.from.token); 
+                        const user = {
+                            'chatkey':chatKey,
+                            'image': params.image, 
+                            'name':params.name,
+                            'orientation':params.orientation, 
+                            'coordinates':params.coordinates,
+                            'fromCoordinates':params.from.coordinates,
+                            'id':params.id,
+                            'deviceID':params.deviceID,
+                            'birthday':params.birthday
+                        }
+
+                        firebase.firestore().runTransaction(transaction => {
+                            return transaction.get(documentreference2).then((doc) => {
+                                if(!doc.data() || doc.data() && !doc.data().hasOwnProperty('data')){
+                                    transaction.set(documentreference2, {'data': [user]})
+                                }else{
+                                    const da = doc.data().data;
+                                    da.push(user);
+                                    transaction.update(documentreference2, {'data': da})
                                 }
+                            });
 
-                                firebase.firestore().runTransaction(transaction => {
-                                
-                                    return transaction.get(documentreference2).then((doc) => {
-                                        if(!doc.data() || doc.data() && !doc.data().hasOwnProperty('data')){
-                                            transaction.set(documentreference2, {'data': [user]})
-                                        }else{
-                                            const da = doc.data().data;
-                                            da.push(user);
-                                            transaction.update(documentreference2, {'data': da})
-                                        }
-                                    });
-
-                                }).then(() => {
-                                    resolve(params);
-                                }).catch((err) => {
-                                    console.log(err)
-                                });
+                          }).then(() => {
+                            resolve(params);
+                        }).catch((err) => {
+                            console.log(err)
+                      });
 
                     }).catch((err) => {
                         console.log(err)
-                    });
-
+                  });
                 }else{
-                    const add = await firestore().collection('meets').doc(params.from.token).get();
                     add.ref.update({
                         [`${params.id}`]: false //the person of desire has a document but you haven't been linked yet (create link)
                     });
@@ -146,13 +140,15 @@ class UserServices {
                     resolve(false)
                 }
             }else{
-                const add = await firestore().collection('meets').doc(params.from.token).get();
                 add.ref.set({
                     [`${params.id}`]: false //person you're wishing to meet has no document and no link (create document and link)
                 },{merge:true});
 
                 resolve(false)
             }
+
+            SendMessageMeet(params.from.name, params.deviceID, params.from.image);
+
         }).catch((error) => {
             console.log(error)
         })

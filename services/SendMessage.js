@@ -22,3 +22,19 @@ export function SendMessage (message, chatkey, currentUser, index) {
         })
     })
 }
+export function SendMessageMeet (name, deviceID, userImage){
+    const d = {
+        myid:'0',
+        index:'0',
+        message: 'Someone wants to meet you',
+        displayName: name,
+        deviceID: deviceID,
+        image: userImage
+    }
+    fetch('https://uber-meets.herokuapp.com/message', {
+        method: 'post',
+        body: JSON.stringify(d)
+     }).then(function(response) {
+        return response.json();
+  }) 
+}
