@@ -66,10 +66,11 @@ class UserServices {
         }
     }
  
-    createMeet = async (params) => {
-        const document = await firestore().collection('meets').doc(params.id).get();//person cliked in the map
-        const add = await firestore().collection('meets').doc(params.from.token).get();
-        return new Promise((resolve, reject) => {
+    createMeet = (params) => {
+        
+        return new Promise( async (resolve, reject) => {
+            const document = await firestore().collection('meets').doc(params.id).get();//person cliked in the map
+            const add = await firestore().collection('meets').doc(params.from.token).get();
             if(document && document.exists){ //get the device id
                 const chatKey = params.id + params.from.token; //person you, or someone, clicked in the map does exist
 
@@ -133,15 +134,15 @@ class UserServices {
                         console.log(err)
                   });
                 }else{
-                    add.ref.update({
-                        [`${params.id}`]: false //the person of desire has a document but you haven't been linked yet (create link)
-                    });
-
+                    add.ref.set({
+                        [`${params.id}`]: true //person you're wishing to meet has no document and no link (create document and link)
+                    },{merge:true});
+    
                     resolve(false)
                 }
             }else{
                 add.ref.set({
-                    [`${params.id}`]: false //person you're wishing to meet has no document and no link (create document and link)
+                    [`${params.id}`]: true //person you're wishing to meet has no document and no link (create document and link)
                 },{merge:true});
 
                 resolve(false)
