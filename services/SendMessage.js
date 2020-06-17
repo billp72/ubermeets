@@ -3,7 +3,7 @@ import React from 'react';
 import firestore from '@react-native-firebase/firestore';
 
 export function SendMessage (message, chatkey, currentUser, index) {
-    const FIREBASE_REF_MEET = firestore().collection('meets');
+    const FIREBASE_REF_MEET = firestore().collection('connects');
     FIREBASE_REF_MEET.doc(currentUser.uid).get().then((snapShot) => {
         const data = snapShot.data();
          data.data.map((d) => {

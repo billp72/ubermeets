@@ -53,7 +53,7 @@ class UserServices {
             if(document && document.exists && 
                 document.data().hasOwnProperty(params.from.token)){//check if connection made
                 params.chatkey = chatKey;
-                const documentreference1 = firestore().collection('meets').doc(params.id);
+                const documentreference1 = firestore().collection('connects').doc(params.id);
                 const targetPerson = {
                     'chatkey': chatKey, 
                     'image':params.from.image,
@@ -68,16 +68,16 @@ class UserServices {
                 
                 firebase.firestore().runTransaction(transaction => {  
                     return transaction.get(documentreference1).then((doc) => {
-                        if(!doc.exists || !doc.data().hasOwnProperty('data')){
-                            transaction.set(documentreference1,{'data': [targetPerson]},{merge: true})
-                        }else{
+                        if(doc.data() && doc.data().hasOwnProperty('data')){
                             const d = doc.data().data;
                             d.push(targetPerson);
-                            transaction.update(documentreference1, {'data': d})
+                            transaction.update(documentreference1, {'data': d})   
+                        }else{
+                            transaction.set(documentreference1,{'data': [targetPerson]})
                         }
                     })
                 }).then(() => {
-                    const documentreference2 = firestore().collection('meets').doc(params.from.token); 
+                    const documentreference2 = firestore().collection('connects').doc(params.from.token); 
                     const user = {
                         'chatkey':chatKey,
                         'image': params.image, 
@@ -92,12 +92,12 @@ class UserServices {
 
                     firebase.firestore().runTransaction(transaction => {
                         return transaction.get(documentreference2).then((doc) => {
-                            if(!doc.exists || !doc.data().hasOwnProperty('data')){
-                                transaction.set(documentreference2, {'data': [user]},{merge: true})
-                            }else{
+                            if(doc.data() && doc.data().hasOwnProperty('data')){
                                 const da = doc.data().data;
                                 da.push(user);
                                 transaction.update(documentreference2, {'data': da})
+                            }else{
+                                transaction.set(documentreference2, {'data': [user]})
                             }
                         });
 

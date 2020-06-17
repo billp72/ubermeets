@@ -8,7 +8,7 @@ import firestore, {firebase} from '@react-native-firebase/firestore';
 const emitter = require('tiny-emitter/instance');
 
 const FIREBASE_REF_MESSAGES = firestore().collection('chat');
-const FIREBASE_REF_MEET = firestore().collection('meets');
+const FIREBASE_REF_MEET = firestore().collection('connects');
 
 const { width, height } = Dimensions.get("window");
 
@@ -30,7 +30,7 @@ class Matches extends Component {
                 id: ur.uid
             })
 
-            let fireUnsubscribe = firestore().collection('meets').doc(ur.uid).onSnapshot(
+            let fireUnsubscribe = firestore().collection('connects').doc(ur.uid).onSnapshot(
                 (snapShot) => {
                     this.setState({data:[]})
                     let match = snapShot.data();
