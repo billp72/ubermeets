@@ -68,7 +68,7 @@ class UserServices {
                 
                 firebase.firestore().runTransaction(transaction => {  
                     return transaction.get(documentreference1).then((doc) => {
-                        if(doc.data() && doc.data().hasOwnProperty('data')){
+                        if(doc.exists && doc.data().hasOwnProperty('data')){
                             const d = doc.data().data;
                             d.push(targetPerson);
                             transaction.update(documentreference1, {'data': d})   
@@ -92,7 +92,7 @@ class UserServices {
 
                     firebase.firestore().runTransaction(transaction => {
                         return transaction.get(documentreference2).then((doc) => {
-                            if(doc.data() && doc.data().hasOwnProperty('data')){
+                            if(doc.exists && doc.data().hasOwnProperty('data')){
                                 const da = doc.data().data;
                                 da.push(user);
                                 transaction.update(documentreference2, {'data': da})
