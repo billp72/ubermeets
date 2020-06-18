@@ -7,8 +7,8 @@ import Footer from '../../Components/Footer';
 import ChatImage from '../../Components/ChatImage';
 import styles from './Styles'
 
-class ChatScreenComponent extends Component (props) {
-
+class ChatScreenComponent extends Component {
+  
   gotoProfile = params => {
     params.navigation.navigate('FBProfile', params);
   }
@@ -21,8 +21,8 @@ class ChatScreenComponent extends Component (props) {
             behavior='padding'
             keyboardVerticalOffset={64}>
 
-            <MessagesList chatkey={props.chatkey} />
-            <MessageForm chatkey={props.chatkey} />
+            <MessagesList chatkey={this.props.chatkey} />
+            <MessageForm chatkey={this.props.chatkey} />
           </KeyboardAvoidingView>
           <Footer leftComponent={{ icon: 'home', color: '#fff', 
                     'onPress': () => this.props.navigation.navigate('Matches'), size:36}}
