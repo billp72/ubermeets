@@ -4,7 +4,6 @@ import React, {Component} from 'react'
 import {
     Image, TouchableHighlight
 } from 'react-native'
-import PropTypes from "prop-types";
 
 class ChatImage extends Component {
     
