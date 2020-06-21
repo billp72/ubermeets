@@ -121,8 +121,7 @@ export default class LogInPage extends React.Component {
                     deviceID: deviceid
                 })
             }
-            _this.props.navigation.navigate('LoggedInNav');
-              
+         
         }).catch(function(error) {
             Alert.alert(error + ' Geolocation not activated')
         });
@@ -130,6 +129,7 @@ export default class LogInPage extends React.Component {
      }).catch((error) => {
        console.error(error.message)
      })
+     this.props.navigation.navigate('LoggedInNav');
   }
 }
 

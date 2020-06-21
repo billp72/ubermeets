@@ -59,6 +59,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>needed to get location data</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>The app will continue to track your location even while it's minimized so different users can contact you as you travel. See Privacy Policy for details</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

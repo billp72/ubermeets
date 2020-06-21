@@ -1,6 +1,7 @@
 /**
  * @format
  */
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import {AppRegistry} from 'react-native';
 import AppContainer  from './Navigation/Navigation';
 import messaging from '@react-native-firebase/messaging';
@@ -8,6 +9,7 @@ import {name as appName} from './app.json';
 const emitter = require('tiny-emitter/instance');
 const Sound = require('react-native-sound');
 
+Icon.loadFont();
 Sound.setCategory('Playback');
 
 // Register background handler
