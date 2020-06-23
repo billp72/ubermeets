@@ -1,5 +1,6 @@
 'use strict'
 import React, { Component } from 'react'
+import StatusBar            from '../Components/IosStatusBar'
 import {
     Text, StyleSheet, View, Image, Animated, Dimensions, TouchableHighlight
 } from 'react-native'
@@ -279,6 +280,7 @@ class Map extends Component {
        
         return (
           <View style={styles.container}>
+            <StatusBar backgroundColor="#2EBD6B" barStyle="light-content" />
             <MapView
                ref={map => this.map = map}
                provider={PROVIDER_GOOGLE}

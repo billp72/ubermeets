@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, Dimensions, Switch, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Image, Dimensions, Switch, TouchableOpacity, Alert } from 'react-native'
 import {facebookService} from '../services/FacebookService'
 import auth from '@react-native-firebase/auth';
 import firestore, {firebase} from '@react-native-firebase/firestore';
@@ -121,16 +121,15 @@ export default class LogInPage extends React.Component {
                     deviceID: deviceid
                 })
             }
-
-            _this.props.navigation.navigate('LoggedInNav');
-              
+         
         }).catch(function(error) {
-            console.error(error)
+            Alert.alert(error + ' Geolocation not activated')
         });
         Geolocation.clearWatch(_watchId);
      }).catch((error) => {
        console.error(error.message)
      })
+     this.props.navigation.navigate('LoggedInNav');
   }
 }
 

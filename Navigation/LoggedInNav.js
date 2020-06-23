@@ -1,5 +1,6 @@
 //login navigation
-import React                     from 'react'
+import React                     from 'react';
+import { Platform }              from 'react-native';
 import Meet                      from '../screens/Meet';
 import Map                       from '../screens/Map';
 import Matches                   from '../screens/Matches';
@@ -22,7 +23,8 @@ const Main = createMaterialTopTabNavigator({
   },{
     tabBarOptions:{
       style:{
-        backgroundColor:'#3D6DCC'
+        backgroundColor:'#3D6DCC',
+        marginTop: Platform.OS === 'ios' ? (31) : (0)
       }
   }
   });
