@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "UberMeets.app"
+               BuildableName = "Metro Meet.app"
                BlueprintName = "UberMeets"
                ReferencedContainer = "container:UberMeets.xcodeproj">
             </BuildableReference>
@@ -55,7 +55,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "UberMeets.app"
+            BuildableName = "Metro Meet.app"
             BlueprintName = "UberMeets"
             ReferencedContainer = "container:UberMeets.xcodeproj">
          </BuildableReference>
@@ -79,7 +79,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "UberMeets.app"
+            BuildableName = "Metro Meet.app"
             BlueprintName = "UberMeets"
             ReferencedContainer = "container:UberMeets.xcodeproj">
          </BuildableReference>
