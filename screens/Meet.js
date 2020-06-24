@@ -60,8 +60,8 @@ class Meet extends Component {
                 leftComponent={{ icon: 'home', color: '#fff', 
                 'onPress': () => this.props.navigation.navigate('Map'), size:36}}
                 centerComponent={<Buttons 
-                    btn1='YES MEET'
-                    btn2='NO MEET' 
+                    btn1='MEET'
+                    btn2='REMOVE' 
                     btn1Func={this.meet.bind(null, params)}
                     btn2Func={this.noMeet.bind(null, params)}
                  />}
