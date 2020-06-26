@@ -38,3 +38,16 @@ export function SendMessageMeet (name, deviceID, userImage){
         return response.json();
   }) 
 }
+
+export function flagContent(user){
+    fetch('https://uber-meets.herokuapp.com/flag', {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}

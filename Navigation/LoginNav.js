@@ -7,7 +7,7 @@ const LoginNav = createStackNavigator({
     Login: {
       screen: Login,
       navigationOptions: () => ({
-          title: 'Uber Meets'
+          title: 'Metro Meet'
       })
     }
   });

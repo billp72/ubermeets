@@ -10,7 +10,7 @@ import auth from '@react-native-firebase/auth';
 import firestore, {firebase} from '@react-native-firebase/firestore';
 import { GeoFirestore } from 'geofirestore';
 import { userServices } from '../services/UserServices';
-
+import { flagContent } from '../services/SendMessage';
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = 0.0421;
 const LATITUDE = 40.7367;
@@ -257,6 +257,10 @@ class Map extends Component {
         this.props.navigation.navigate('Meet', data);
     }
 
+    flag = (data) => {
+      flagContent(data);
+    }
+
     render() {
           
         const interpolations = this.state.markers.map((marker, index) => {
@@ -348,7 +352,10 @@ class Map extends Component {
                                   </Text> 
                                 </TouchableHighlight>
                             </View>
-                            
+                            <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
+                                  onPress={(e) => {e.stopPropagation(); this.flag(marker)}}>
+                                    <Image source={require('../assets/flag.png')} style={{width:20,height:20}} />
+                            </TouchableHighlight>
                         </View>
                     ))}
                     </Animated.ScrollView>
