@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import StatusBar            from '../Components/IosStatusBar'
 import {
-    Text, StyleSheet, View, Image, Animated, Dimensions, TouchableHighlight
+    Text, StyleSheet, View, Image, Animated, Dimensions, TouchableHighlight, Alert
 } from 'react-native'
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import Geolocation from '@react-native-community/geolocation';
@@ -258,7 +258,22 @@ class Map extends Component {
     }
 
     flag = (data) => {
-      flagContent(data);
+      Alert.alert(
+        "FLAG",
+        "Are your sure you want to flag "+data.name+"?",
+        [
+          {
+            text: "YES",
+            onPress: () => {flagContent(data)}
+          },
+          { 
+            text: "NO", 
+            style: "cancel"
+          }
+        ],
+        { cancelable: false }
+      )
+      
     }
 
     render() {
