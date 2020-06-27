@@ -18,7 +18,6 @@
 		4AB0F2ACD1DBFF22259436C9 /* libPods-UberMeets-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B7504F01BECD937362389D /* libPods-UberMeets-tvOSTests.a */; };
 		8C29A8611B361EFAAE5FE6EE /* libPods-UberMeets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7081BEB4399CD82350D844F /* libPods-UberMeets.a */; };
 		90F2512DD065927016E63DC6 /* libPods-UberMeets-UberMeetsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A912C35AA660FA43C48DEF /* libPods-UberMeets-UberMeetsTests.a */; };
-		DD44615E248684220092F971 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD44615D248684220092F971 /* GoogleService-Info.plist */; };
 		DD8215E5249D168100E76870 /* AIRDummyView.m in Sources */ = {isa = PBXBuildFile; fileRef = DD8215AF249D168000E76870 /* AIRDummyView.m */; };
 		DD8215E6249D168100E76870 /* AIRGoogleMapUrlTile.m in Sources */ = {isa = PBXBuildFile; fileRef = DD8215B3249D168000E76870 /* AIRGoogleMapUrlTile.m */; };
 		DD8215E7249D168100E76870 /* AIRGoogleMapPolygonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DD8215B6249D168000E76870 /* AIRGoogleMapPolygonManager.m */; };
@@ -46,6 +45,7 @@
 		DD8215FD249D168100E76870 /* AIRGoogleMapPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = DD8215E2249D168100E76870 /* AIRGoogleMapPolygon.m */; };
 		DD8215FE249D168100E76870 /* AIRGMSMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = DD8215E3249D168100E76870 /* AIRGMSMarker.m */; };
 		DD8215FF249D168100E76870 /* AIRGoogleMapCalloutSubview.m in Sources */ = {isa = PBXBuildFile; fileRef = DD8215E4249D168100E76870 /* AIRGoogleMapCalloutSubview.m */; };
+		DDE79DDC24A3C077008AA1CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDE79DDB24A3C077008AA1CD /* GoogleService-Info.plist */; };
 		F1738CA064373206D05F8EDE /* libPods-UberMeets-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D8D16F4DE0DE155FBFBA90 /* libPods-UberMeets-tvOS.a */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +72,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* UberMeetsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UberMeetsTests.m; sourceTree = "<group>"; };
 		09D8D16F4DE0DE155FBFBA90 /* libPods-UberMeets-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UberMeets-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07F961A680F5B00A75B9A /* UberMeets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UberMeets.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Metro Meet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Metro Meet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = UberMeets/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = UberMeets/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -89,7 +89,6 @@
 		C6ED33954C26834512962170 /* Pods-UberMeets-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberMeets-tvOS.release.xcconfig"; path = "Target Support Files/Pods-UberMeets-tvOS/Pods-UberMeets-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		C9B7504F01BECD937362389D /* libPods-UberMeets-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UberMeets-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7081BEB4399CD82350D844F /* libPods-UberMeets.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UberMeets.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD44615D248684220092F971 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "UberMeets/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD8215AF249D168000E76870 /* AIRDummyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRDummyView.m; sourceTree = "<group>"; };
 		DD8215B0249D168000E76870 /* AIRGoogleMapWMSTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapWMSTile.h; sourceTree = "<group>"; };
 		DD8215B1249D168000E76870 /* AIRGoogleMapPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapPolyline.h; sourceTree = "<group>"; };
@@ -145,6 +144,7 @@
 		DD8215E3249D168100E76870 /* AIRGMSMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGMSMarker.m; sourceTree = "<group>"; };
 		DD8215E4249D168100E76870 /* AIRGoogleMapCalloutSubview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRGoogleMapCalloutSubview.m; sourceTree = "<group>"; };
 		DD9ECFEA2493BCBD00F7D46D /* UberMeets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = UberMeets.entitlements; path = UberMeets/UberMeets.entitlements; sourceTree = "<group>"; };
+		DDE79DDB24A3C077008AA1CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DE74AE4573FD4D0B2D2B7708 /* Pods-UberMeets-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberMeets-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-UberMeets-tvOS/Pods-UberMeets-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E36D4BEE7C26D0991B2D6947 /* Pods-UberMeets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberMeets.release.xcconfig"; path = "Target Support Files/Pods-UberMeets/Pods-UberMeets.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -208,8 +208,8 @@
 		13B07FAE1A68108700A75B9A /* UberMeets */ = {
 			isa = PBXGroup;
 			children = (
+				DDE79DDB24A3C077008AA1CD /* GoogleService-Info.plist */,
 				DD9ECFEA2493BCBD00F7D46D /* UberMeets.entitlements */,
-				DD44615D248684220092F971 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -260,7 +260,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* UberMeets.app */,
+				13B07F961A680F5B00A75B9A /* Metro Meet.app */,
 				00E356EE1AD99517003FC87E /* UberMeetsTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* UberMeets-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* UberMeets-tvOSTests.xctest */,
@@ -386,7 +386,7 @@
 			);
 			name = UberMeets;
 			productName = UberMeets;
-			productReference = 13B07F961A680F5B00A75B9A /* UberMeets.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Metro Meet.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* UberMeets-tvOS */ = {
@@ -490,7 +490,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				DD44615E248684220092F971 /* GoogleService-Info.plist in Resources */,
+				DDE79DDC24A3C077008AA1CD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -925,7 +925,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = UberMeets/UberMeets.entitlements;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 5CY283KNC7;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -935,14 +935,14 @@
 				);
 				INFOPLIST_FILE = UberMeets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ubermeets;
-				PRODUCT_NAME = UberMeets;
+				PRODUCT_NAME = "Metro Meet";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -956,7 +956,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = UberMeets/UberMeets.entitlements;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 5CY283KNC7;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -971,14 +971,14 @@
 				);
 				INFOPLIST_FILE = UberMeets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ubermeets;
-				PRODUCT_NAME = UberMeets;
+				PRODUCT_NAME = "Metro Meet";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
