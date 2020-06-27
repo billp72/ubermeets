@@ -1,5 +1,4 @@
 import React, {Component}        from 'react';
-import { SafeAreaView }          from 'react-native';
 import FBSDK                     from 'react-native-fbsdk'
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import LoginNav                  from './LoginNav';

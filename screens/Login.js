@@ -1,12 +1,13 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, Dimensions, Switch, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, View, Text, 
+  Image, Dimensions, Switch, TouchableOpacity, Alert } from 'react-native'
 import {facebookService} from '../services/FacebookService'
 import auth from '@react-native-firebase/auth';
 import firestore, {firebase} from '@react-native-firebase/firestore';
 import Geolocation from '@react-native-community/geolocation';
 import { GeoFirestore } from 'geofirestore';
 import { requestUserPermission } from '../services/Permission'
-
+import  CheckBox from '../Components/CheckBox'
 export default class LogInPage extends React.Component {
   constructor(props) {
     super(props)
@@ -16,7 +17,8 @@ export default class LogInPage extends React.Component {
     this.login = this.login.bind(this)
     this.state = {
       imageHeight: Dimensions.get('window').width - 50,
-      toggle:false
+      toggle:false,
+      termsAccepted: false
     }   
   }
 
@@ -34,18 +36,20 @@ export default class LogInPage extends React.Component {
  setOrientation = (value) => {
     this.setState({toggle: value})
  }
+ 
+ handleCheckBox = () => this.setState({ termsAccepted: !this.state.termsAccepted })
 
   render() {
     return (
       <React.Fragment>
         <Image source={require('../assets/mainphoto.jpg')} style={{width:'100%', height:this.state.imageHeight}} />
          <View style={styles.container}>
-          <Text style={{textAlign:'center', padding:20, fontSize:20}}>
+          <Text style={{textAlign:'center', padding:10, fontSize:20}}>
             Meet someone at the bar, club, coffee house or wherever you are
           
-          </Text>
-          <Text style={{fontWeight:'700', fontSize:20}}>{this.state.toggle?'Gay':'Straight'}</Text>
-          <Text>{'\n'}</Text>
+          </Text> 
+          <Text style={{fontWeight:'700', fontSize:20, padding:10}}>{this.state.toggle?'Gay':'Straight'}</Text>
+          
           <Switch
               style={{transform: [{ scaleX: 1.9 }, { scaleY: 1.9 }]}}
               trackColor={{false: 'gray', true: '#841584'}}
@@ -55,7 +59,13 @@ export default class LogInPage extends React.Component {
               value={this.state.toggle}
           />
           <Text>{'\n'}</Text>
+          <CheckBox 
+                    selected={this.state.termsAccepted} 
+                    onPress={this.handleCheckBox}
+                    text='Accept terms and conditions'
+                /> 
           <TouchableOpacity
+              disabled={!this.state.termsAccepted}
               onPress={() => facebookService.makeLoginButton((accessToken, url) => {
                 let orientation = this.state.toggle ? 'gay' : 'straight'
                 this.login(accessToken, url, orientation)
@@ -136,8 +146,7 @@ export default class LogInPage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F5FCFF'
   }
 })
