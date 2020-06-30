@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import StatusBar            from '../Components/IosStatusBar'
 import {
-    Text, StyleSheet, View, Image, Animated, Dimensions, TouchableHighlight, Alert
+    Text, StyleSheet, View, Image, Animated, Dimensions, TouchableHighlight, Alert, FlatList
 } from 'react-native'
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import Geolocation from '@react-native-community/geolocation';
@@ -282,6 +282,29 @@ class Map extends Component {
       )
       
     }
+    renderItems = ({item, index}) => (
+        <View style={styles.card} key={index}>
+            <Image
+                source={{uri:item.image}}
+                style={styles.cardImage}
+                resizeMode="cover"
+            />
+            <View style={styles.textContent}>
+                <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
+                  onPress={(e) => {e.stopPropagation(); this.tinderScreen(item)}}>
+                  <Text 
+                        numberOfLines={1} 
+                        style={styles.cardtitle}>
+                    {item.name}
+                  </Text> 
+                </TouchableHighlight>
+            </View>
+            <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
+                  onPress={(e) => {e.stopPropagation(); this.flag(item)}}>
+                    <Image source={require('../assets/flag.png')} style={{width:20,height:20}} />
+            </TouchableHighlight>
+      </View>
+    )
 
     render() {
           
@@ -337,54 +360,22 @@ class Map extends Component {
                     )
                 })}
                 </MapView>
-                <Animated.ScrollView
+                <FlatList
                     horizontal
-                    scrollEventThrottle={1}
+                    pagingEnabled={true}
                     showsHorizontalScrollIndicator={false}
-                    snapToInterval={CARD_WIDTH}
-                    onScroll={Animated.event(
-                        [
-                        {
-                            nativeEvent: {
-                            contentOffset: {
-                                x: this.animation,
-                            },
-                            },
-                        },
-                        ],
-                        { useNativeDriver: true }
-                    )}
+                    legacyImplementation={false}
+                    data={this.state.markers}
+                    renderItem={(item, index) => this.renderItems(item, index)}
+                    keyExtractor={marker => marker.id}
                     style={styles.scrollView}
                     contentContainerStyle={styles.endPadding}
-                    >
-                    {this.state.markers.map((marker, index) => (
-                        <View style={styles.card} key={index}>
-                            <Image
-                                source={{uri:marker.image}}
-                                style={styles.cardImage}
-                                resizeMode="cover"
-                            />
-                            <View style={styles.textContent}>
-                                <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
-                                  onPress={(e) => {e.stopPropagation(); this.tinderScreen(marker)}}>
-                                  <Text 
-                                        numberOfLines={1} 
-                                        style={styles.cardtitle}>
-                                    {marker.name}
-                                  </Text> 
-                                </TouchableHighlight>
-                            </View>
-                            <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
-                                  onPress={(e) => {e.stopPropagation(); this.flag(marker)}}>
-                                    <Image source={require('../assets/flag.png')} style={{width:20,height:20}} />
-                            </TouchableHighlight>
-                        </View>
-                    ))}
-                    </Animated.ScrollView>
-                    </View>
-                  )
-              }
-        }
+                />
+                    
+              </View>
+            )
+          }
+       }
 
 const styles = StyleSheet.create({
     container: {
