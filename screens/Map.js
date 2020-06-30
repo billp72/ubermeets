@@ -367,6 +367,7 @@ class Map extends Component {
                     legacyImplementation={false}
                     data={this.state.markers}
                     renderItem={(item, index) => this.renderItems(item, index)}
+                    onScrollEndDrag={}
                     keyExtractor={marker => marker.id}
                     style={styles.scrollView}
                     contentContainerStyle={styles.endPadding}
