@@ -106,7 +106,7 @@ class Map extends Component {
                 const GeoQuery = this.GeoCollectionReference.near(
                     { 
                      center: new firestore.GeoPoint(position.coords.latitude,
-                     position.coords.longitude), radius: 20 
+                     position.coords.longitude), radius: 25 
                     });
                 
                  GeoQuery.get().then((GeoQuerySnapshot) => {
@@ -138,10 +138,10 @@ class Map extends Component {
             }, 
             error => console.log(error),
             { 
-              enableHighAccuracy: true,
-              timeout: 20000,
-              maximumAge: 1000,
-              distanceFilter: 20
+              enableHighAccuracy: false,
+              //maximumAge: 0,
+              //timeout: 60000,
+              distanceFilter: 10
             }
         );
         
@@ -210,7 +210,7 @@ class Map extends Component {
            const GeoQuery = this.GeoCollectionReference.near(
               { 
                center: new firestore.GeoPoint(position.coords.latitude,
-               position.coords.longitude), radius: 20 
+               position.coords.longitude), radius: 25 
             });
 
             GeoQuery.get().then((GeoQuerySnapshot) => {
@@ -233,7 +233,14 @@ class Map extends Component {
                } 
             }, (error) => {
               console.log(error)
-            })
+            },
+             {
+              enableHighAccuracy: false,
+              //timeout: 60000,
+              //maximumAge:0
+              distanceFilter: 5
+             }
+            )
         })
     }
 
