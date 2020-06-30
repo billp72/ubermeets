@@ -367,7 +367,18 @@ class Map extends Component {
                     legacyImplementation={false}
                     data={this.state.markers}
                     renderItem={(item, index) => this.renderItems(item, index)}
-                    onScrollEndDrag={}
+                    onScrollBeginDrag={() => Animated.event(
+                      [
+                      {
+                          nativeEvent: {
+                          contentOffset: {
+                              x: this.animation,
+                          },
+                          },
+                      },
+                      ],
+                      { useNativeDriver: true }
+                  )}
                     keyExtractor={marker => marker.id}
                     style={styles.scrollView}
                     contentContainerStyle={styles.endPadding}
