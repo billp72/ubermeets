@@ -340,6 +340,7 @@ class Map extends Component {
                 <Animated.ScrollView
                     horizontal
                     scrollEventThrottle={16}
+                    pagingEnabled={true}
                     showsHorizontalScrollIndicator={false}
                     snapToInterval={CARD_WIDTH}
                     removeClippedSubviews={true}
