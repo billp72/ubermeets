@@ -34,27 +34,27 @@ class Images extends PureComponent {
     render() { 
         return (
             <View style={styles.card}>
-            <Image
-                source={{uri:this.props.itm.item.image}}
-                style={styles.cardImage}
-                resizeMode="cover"
-            />
-            <View style={styles.textContent}>
+                <Image
+                    source={{uri:this.props.itm.item.image}}
+                    style={styles.cardImage}
+                    resizeMode="cover"
+                />
+                <View style={styles.textContent}>
+                    <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
+                    onPress={(e) => {e.stopPropagation(); this.props.tinder(this.props.itm.item)}}>
+                    <Text 
+                            numberOfLines={1} 
+                            style={styles.cardtitle}>
+                        {this.props.itm.item.name}
+                    </Text> 
+                    </TouchableHighlight>
+                </View>
                 <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
-                  onPress={(e) => {e.stopPropagation(); this.props.tinder(this.props.itm.item)}}>
-                  <Text 
-                        numberOfLines={1} 
-                        style={styles.cardtitle}>
-                    {this.props.itm.item.name}
-                  </Text> 
+                    onPress={(e) => {e.stopPropagation(); this.flag(this.props.itm.item)}}>
+                        <Image source={require('../assets/flag.png')} style={{width:20,height:20}} />
                 </TouchableHighlight>
             </View>
-            <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
-                  onPress={(e) => {e.stopPropagation(); this.flag(this.props.itm.item)}}>
-                    <Image source={require('../assets/flag.png')} style={{width:20,height:20}} />
-            </TouchableHighlight>
-      </View>
-     )
+        )
     }
 }
 
