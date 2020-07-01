@@ -49,7 +49,13 @@ class Map extends Component {
         };
         
     }
-    
+
+    shouldComponentUpdate(nextState, nextProps) {
+      return nextProps.longitude !== this.state.markers.longitude ||
+             nextProps.latitude !== this.state.markers.latitude;
+      
+    }
+
     async componentDidMount () {
         this._isMounted = true;
         const _this = this;
@@ -108,7 +114,7 @@ class Map extends Component {
                 const GeoQuery = this.GeoCollectionReference.near(
                     { 
                      center: new firestore.GeoPoint(position.coords.latitude,
-                     position.coords.longitude), radius: 25 
+                     position.coords.longitude), radius: 30 
                     });
                 
                  GeoQuery.get().then((GeoQuerySnapshot) => {
@@ -212,7 +218,7 @@ class Map extends Component {
            const GeoQuery = this.GeoCollectionReference.near(
               { 
                center: new firestore.GeoPoint(position.coords.latitude,
-               position.coords.longitude), radius: 25 
+               position.coords.longitude), radius: 30 
             });
 
             GeoQuery.get().then((GeoQuerySnapshot) => {
@@ -299,7 +305,8 @@ class Map extends Component {
                       };
                     return(
                         <MapView.Marker
-                            key={index} 
+                            key={index}
+                            tracksViewChanges={false} 
                             coordinate={{longitude: marker.coordinates._longitude, latitude: marker.coordinates._latitude}}
                         >
                             <Animated.View style={[styles.markerWrap, opacityStyle]}>
@@ -312,7 +319,7 @@ class Map extends Component {
                 </MapView>
                 <AnimatedFlatList
                     horizontal
-                    initialNumToRender={10}
+                    initialNumToRender={7}
                     showsHorizontalScrollIndicator={false}
                     data={this.state.markers}
                     renderItem={(item) => <Images itm={item} tinder={this.tinderScreen} />}
