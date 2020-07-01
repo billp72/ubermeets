@@ -238,7 +238,7 @@ class Map extends Component {
               enableHighAccuracy: false,
               //timeout: 60000,
               //maximumAge:0
-              distanceFilter: 5
+              distanceFilter: 2
              }
             )
         })
