@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import StatusBar            from '../Components/IosStatusBar'
 import {
-    Text, StyleSheet, View, Image, Animated, Dimensions, TouchableHighlight, Alert, FlatList
+    StyleSheet, View, Animated, Dimensions, FlatList
 } from 'react-native'
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import Geolocation from '@react-native-community/geolocation';
@@ -10,7 +10,9 @@ import auth from '@react-native-firebase/auth';
 import firestore, {firebase} from '@react-native-firebase/firestore';
 import { GeoFirestore } from 'geofirestore';
 import { userServices } from '../services/UserServices';
-import { flagContent } from '../services/SendMessage';
+
+import Images          from '../Components/Images';
+
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = 0.0421;
 const LATITUDE = 40.7367;
@@ -20,7 +22,7 @@ const { width, height } = Dimensions.get("window");
 
 const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
-
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 class Map extends Component {
     _isMounted = false;
@@ -238,7 +240,7 @@ class Map extends Component {
               enableHighAccuracy: false,
               //timeout: 60000,
               //maximumAge:0
-              distanceFilter: 5
+              distanceFilter: 2
              }
             )
         })
@@ -252,59 +254,17 @@ class Map extends Component {
     });
     //send device id
     tinderScreen = (data) => {
-        data.from = {
-            token: this.state.token,
-            name: this.state.name,
-            coordinates: new firestore.GeoPoint(this.state.latitude, this.state.longitude),
-            image: this.state.image,
-            deviceID: this.state.deviceID,
-            orientation: this.state.orientation,
-            birthday: this.state.birthday
-        }
-        this.props.navigation.navigate('Meet', data);
-    }
-
-    flag = (data) => {
-      Alert.alert(
-        "FLAG",
-        "Are your sure you want to flag "+data.name+"?",
-        [
-          {
-            text: "YES",
-            onPress: () => {flagContent(data)}
-          },
-          { 
-            text: "NO", 
-            style: "cancel"
-          }
-        ],
-        { cancelable: false }
-      )
-      
-    }
-    renderItems = ({item, index}) => (
-        <View style={styles.card} key={index}>
-            <Image
-                source={{uri:item.image}}
-                style={styles.cardImage}
-                resizeMode="cover"
-            />
-            <View style={styles.textContent}>
-                <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
-                  onPress={(e) => {e.stopPropagation(); this.tinderScreen(item)}}>
-                  <Text 
-                        numberOfLines={1} 
-                        style={styles.cardtitle}>
-                    {item.name}
-                  </Text> 
-                </TouchableHighlight>
-            </View>
-            <TouchableHighlight activeOpacity={0.4} underlayColor="#F5F5F5" 
-                  onPress={(e) => {e.stopPropagation(); this.flag(item)}}>
-                    <Image source={require('../assets/flag.png')} style={{width:20,height:20}} />
-            </TouchableHighlight>
-      </View>
-    )
+      data.from = {
+          token: this.state.token,
+          name: this.state.name,
+          coordinates: new firestore.GeoPoint(this.state.latitude, this.state.longitude),
+          image: this.state.image,
+          deviceID: this.state.deviceID,
+          orientation: this.state.orientation,
+          birthday: this.state.birthday
+      }
+      this.props.navigation.navigate('Meet', data);
+   }
 
     render() {
           
@@ -314,17 +274,13 @@ class Map extends Component {
               index * CARD_WIDTH,
               ((index + 1) * CARD_WIDTH),
             ];
-            const scale = this.animation.interpolate({
-              inputRange,
-              outputRange: [1, 2.5, 1],
-              extrapolate: "clamp",
-            });
+            
             const opacity = this.animation.interpolate({
               inputRange,
               outputRange: [0.35, 1, 0.35],
               extrapolate: "clamp",
             });
-            return { scale, opacity };
+            return { opacity };
         });
        
         return (
@@ -337,13 +293,7 @@ class Map extends Component {
                style={{ ...StyleSheet.absoluteFillObject }}
             >
                 {this.state.markers.map((marker, index) => {
-                    const scaleStyle = {
-                        transform: [
-                          {
-                            scale: interpolations[index].scale,
-                          },
-                        ],
-                      };
+                    
                       const opacityStyle = {
                         opacity: interpolations[index].opacity,
                       };
@@ -353,21 +303,20 @@ class Map extends Component {
                             coordinate={{longitude: marker.coordinates._longitude, latitude: marker.coordinates._latitude}}
                         >
                             <Animated.View style={[styles.markerWrap, opacityStyle]}>
-                                <Animated.View style={[styles.ring, scaleStyle]} />
+                                <Animated.View style={[styles.ring]} />
                                     <View style={styles.marker} />
                             </Animated.View>
                         </MapView.Marker>
                     )
                 })}
                 </MapView>
-                <FlatList
+                <AnimatedFlatList
                     horizontal
-                    pagingEnabled={true}
+                    initialNumToRender={10}
                     showsHorizontalScrollIndicator={false}
-                    legacyImplementation={false}
                     data={this.state.markers}
-                    renderItem={(item, index) => this.renderItems(item, index)}
-                    onScrollBeginDrag={() => Animated.event(
+                    renderItem={(item) => <Images itm={item} tinder={this.tinderScreen} />}
+                    onScroll={Animated.event(
                       [
                       {
                           nativeEvent: {
@@ -403,57 +352,25 @@ const styles = StyleSheet.create({
     endPadding: {
         paddingRight: width - CARD_WIDTH,
     },
-    card: {
-        padding: 10,
-        elevation: 2,
-        backgroundColor: "#FFF",
-        marginHorizontal: 10,
-        shadowColor: "#000",
-        shadowRadius: 5,
-        shadowOpacity: 0.3,
-        shadowOffset: { x: 2, y: -2 },
-        height: CARD_HEIGHT,
-        width: CARD_WIDTH,
-        overflow: "hidden",
-      },
-      cardImage: {
-        flex: 3,
-        width: "100%",
-        height: "100%",
-        alignSelf: "center",
-      },
-      textContent: {
-        flex: 1
-      },
-      cardtitle: {
-        fontSize: 12,
-        marginTop: 5,
-        fontWeight: "bold",
-        color:"#0000EE",
-      },
-      cardDescription: {
-        fontSize: 12,
-        color: "#444",
-      },
-      markerWrap: {
-        alignItems: "center",
-        justifyContent: "center",
-      },
-      marker: {
-        width: 10,
-        height: 10,
-        borderRadius: 4,
-        backgroundColor: "rgba(130,4,150, 0.9)",
-      },
-      ring: {
-        width: 24,
-        height: 24,
-        borderRadius: 12,
-        backgroundColor: "rgba(130,4,150, 0.3)",
-        position: "absolute",
-        borderWidth: 1,
-        borderColor: "rgba(130,4,150, 0.5)",
-      },
+    markerWrap: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    marker: {
+      width: 10,
+      height: 10,
+      borderRadius: 4,
+      backgroundColor: "rgba(130,4,150, 0.9)",
+    },
+    ring: {
+      width: 24,
+      height: 24,
+      borderRadius: 12,
+      backgroundColor: "rgba(130,4,150, 0.3)",
+      position: "absolute",
+      borderWidth: 1,
+      borderColor: "rgba(130,4,150, 0.5)",
+    }
 });
 
 export default Map;
