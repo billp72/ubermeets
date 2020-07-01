@@ -339,9 +339,10 @@ class Map extends Component {
                 </MapView>
                 <Animated.ScrollView
                     horizontal
-                    scrollEventThrottle={1}
+                    scrollEventThrottle={16}
                     showsHorizontalScrollIndicator={false}
                     snapToInterval={CARD_WIDTH}
+                    removeClippedSubviews={true}
                     onScroll={Animated.event(
                         [
                         {
