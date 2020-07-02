@@ -7,6 +7,7 @@ import { facebookService } from '../services/FacebookService';
 import firestore, {firebase} from '@react-native-firebase/firestore';
 import { GeoFirestore } from 'geofirestore';
 import auth from '@react-native-firebase/auth';
+const emitter = require('tiny-emitter/instance');
 
 class Profile extends Component {
     constructor(props){
@@ -26,7 +27,8 @@ class Profile extends Component {
        this.props.navigation.addListener('willFocus', async (route) => { 
             if(route.state.routeName == 'Profile'){ 
                 const orientation = await firestore().collection('userinfo').doc(user.uid).get()
-                const bucket = orientation.data().orientation === 'gay' ? 'location' : orientation.data().gender;
+                const bucket = orientation.data().orientation === 'gay' 
+                || orientation.data().gender == 'butch' ? 'location' : orientation.data().gender;
          
                 const document = await this.geofirestore.collection(bucket).doc(user.uid).get();
                 if(document && document.exists){
@@ -63,12 +65,15 @@ class Profile extends Component {
     tracking = async (value) => {
         const user = auth().currentUser;
         const orientation = await firestore().collection('userinfo').doc(user.uid).get()
-        const bucket = orientation.data().orientation === 'gay' ? 'location' : orientation.data().gender;
+        const bucket = orientation.data().orientation === 'gay' 
+        || orientation.data().gender == 'butch' ? 'location' : orientation.data().gender;
         firestore().collection(bucket).doc(user.uid).delete().then(() => {
                this.setState({
                    disable:true,
                    toggle:value
                 })
+                let status = this.state.disable ? null : 'yes';
+                emitter.emit('status', {status:status});
         }).catch(function(error) {
                 console.error("Error removing document: ", error);
         });   
@@ -126,7 +131,8 @@ class Profile extends Component {
         const _this = this;
         const user = auth().currentUser;
         const orientation = await firestore().collection("userinfo").doc(user.uid).get();
-        let bucket = orientation.data().orientation === 'gay' ? 'location' : orientation.data().gender;
+        let bucket = orientation.data().orientation === 'gay' 
+        || orientation.data().gender == 'butch'  ? 'location' : orientation.data().gender;
         firestore().collection(bucket).doc(user.uid).delete().then(() => {
             _this.props.navigation.navigate('LoginNav');
             _this.state = {

@@ -1,6 +1,6 @@
 'use strict'
 import React, { Component } from 'react'
-import StatusBar            from '../Components/IosStatusBar'
+import Statusbar from '../Components/IosStatusBar'
 import {
     StyleSheet, View, Animated, Dimensions, FlatList
 } from 'react-native'
@@ -12,6 +12,7 @@ import { GeoFirestore } from 'geofirestore';
 import { userServices } from '../services/UserServices';
 
 import Images          from '../Components/Images';
+const emitter = require('tiny-emitter/instance');
 
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = 0.0421;
@@ -96,6 +97,7 @@ class Map extends Component {
        this.props.navigation.addListener('willFocus', (route) => { 
           if(route.state.routeName === 'Map'){ 
             _this.getLatestMarkers();
+            emitter.emit('status', {status:'yes'})
           } 
        })
 
@@ -290,8 +292,9 @@ class Map extends Component {
         });
        
         return (
+          
           <View style={styles.container}>
-            <StatusBar backgroundColor="#2EBD6B" barStyle="light-content" />
+            <Statusbar barStyle="light-content" />
             <MapView
                ref={map => this.map = map}
                provider={PROVIDER_GOOGLE}

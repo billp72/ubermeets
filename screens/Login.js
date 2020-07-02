@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, 
-  Image, Dimensions, Switch, TouchableOpacity, Alert } from 'react-native'
+  Image, Dimensions, Switch, TouchableOpacity, Alert, StatusBar } from 'react-native'
 import {facebookService} from '../services/FacebookService'
 import auth from '@react-native-firebase/auth';
 import firestore, {firebase} from '@react-native-firebase/firestore';
@@ -8,6 +8,8 @@ import Geolocation from '@react-native-community/geolocation';
 import { GeoFirestore } from 'geofirestore';
 import { requestUserPermission } from '../services/Permission'
 import  CheckBox from '../Components/CheckBox'
+const emitter = require('tiny-emitter/instance');
+
 export default class LogInPage extends React.Component {
   constructor(props) {
     super(props)
@@ -42,6 +44,7 @@ export default class LogInPage extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <StatusBar backgroundColor={'#ff0000'} { ...this.props } />
         <Image source={require('../assets/mainphoto.jpg')} style={{width:'100%', height:this.state.imageHeight}} />
          <View style={styles.container}>
           <Text style={{textAlign:'center', padding:10, fontSize:20}}>
@@ -140,6 +143,7 @@ export default class LogInPage extends React.Component {
        console.error(error.message)
      })
      this.props.navigation.navigate('LoggedInNav');
+     emitter.emit('status', {status:'yes'})
   }
 }
 
