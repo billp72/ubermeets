@@ -52,8 +52,8 @@ class Map extends Component {
     }
 
     shouldComponentUpdate(nextState, nextProps) {
-      return nextProps.longitude !== this.state.markers.longitude ||
-             nextProps.latitude !== this.state.markers.latitude;
+      return nextState.longitude !== this.state.longitude ||
+             nextState.latitude !== this.state.latitude;
       
     }
 
