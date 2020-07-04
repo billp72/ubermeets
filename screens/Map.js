@@ -51,10 +51,9 @@ class Map extends Component {
         
     }
 
-    shouldComponentUpdate(nextState, nextProps) {
-      return nextProps.longitude !== this.props.longitude ||
-             nextProps.latitude !== this.props.latitude ||
-             this.state.markers.length !== nextProps.markers.length;
+    shouldComponentUpdate(nextProps, nextState) {
+      return nextState.longitude !== undefined &&
+             nextState.latitude !== undefined 
       
     }
 
@@ -122,14 +121,15 @@ class Map extends Component {
                 
                  GeoQuery.get().then((GeoQuerySnapshot) => {
                     if(this._isMounted){
-                       this.state.markers.length = 0;
+                       let newstate = [];
                        GeoQuerySnapshot.forEach(d => {
                           userServices.checkUser(d.id, this.state.token).then(response => {
                             if(!response){
                               let res = d.data();
                               res.id = d.id; 
+                              newstate.push(res)
                               this.setState(state => {
-                                state.markers.push(res)
+                                state.markers = newstate
                                 return state;
                               });
                             }
@@ -160,7 +160,8 @@ class Map extends Component {
             let normalizeCoords = {}
             let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
             if (index >= this.state.markers.length) {
-              index = this.state.markers.length - 1;
+              let statelength = this.state.markers.length;
+              index = statelength - 1
             }
             if (index <= 0) {
               index = 0;
@@ -226,14 +227,15 @@ class Map extends Component {
 
             GeoQuery.get().then((GeoQuerySnapshot) => {
               if(this._isMounted){
-                this.state.markers.length = 0;
+                let newstate = [];
                 GeoQuerySnapshot.forEach(d => {
                     userServices.checkUser(d.id, this.state.token).then(response => {
                        if(!response){
                           let res = d.data();
                           res.id = d.id; 
+                          newstate.push(res);
                           this.setState(state => {
-                              state.markers.push(res)
+                              state.markers = newstate
                               return state;
                           });
                         }
