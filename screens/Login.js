@@ -117,7 +117,7 @@ export default class LogInPage extends React.Component {
           deviceID: deviceid
         });
         
-        const _watchId = Geolocation.getCurrentPosition((position) => {
+        Geolocation.getCurrentPosition((position) => {
 
             if(document && document.exists){
                 document.ref.update({
@@ -138,12 +138,12 @@ export default class LogInPage extends React.Component {
         }).catch(function(error) {
             Alert.alert(error + ' Geolocation not activated')
         });
-        Geolocation.clearWatch(_watchId);
+       
      }).catch((error) => {
        console.error(error.message)
      })
      this.props.navigation.navigate('LoggedInNav');
-     emitter.emit('status', {status:'yes'})
+     
   }
 }
 

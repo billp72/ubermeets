@@ -198,7 +198,7 @@ class Map extends Component {
     }
 
     getLatestMarkers = () => {
-        this._watchId = Geolocation.getCurrentPosition( async (position) => {
+        Geolocation.getCurrentPosition( async (position) => {
           
             this.setState({
               latitude: position.coords.latitude,
