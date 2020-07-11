@@ -265,7 +265,8 @@ class Map extends Component {
     });
     //send device id
     tinderScreen = (data) => {
-      data.from = {
+      if(!data.ad){
+        data.from = {
           token: this.state.token,
           name: this.state.name,
           coordinates: new firestore.GeoPoint(this.state.latitude, this.state.longitude),
@@ -274,7 +275,11 @@ class Map extends Component {
           orientation: this.state.orientation,
           birthday: this.state.birthday
       }
-      this.props.navigation.navigate('Meet', data);
+        this.props.navigation.navigate('Meet', data);
+      }else{
+        this.props.navigation.navigate('Ads', data);
+      }
+      
    }
 
     render() {

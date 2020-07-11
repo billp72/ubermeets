@@ -7,6 +7,7 @@ import Matches                   from '../screens/Matches';
 import Profile                   from '../screens/Profile';
 import FBProfile                 from '../screens/FBProfile';
 import Chat                      from '../screens/Chat';
+import Ads                       from '../screens/Ads';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator }  from 'react-navigation-stack';
 
@@ -41,6 +42,9 @@ const Main = createMaterialTopTabNavigator({
     },
     FBProfile: {
       screen: FBProfile
+    },
+    Ads: {
+      screen: Ads
     }
   },
   {
@@ -52,4 +56,3 @@ const Main = createMaterialTopTabNavigator({
  
 
 export default LoggedInNav;
-//const LoggedInContainer = createAppContainer(LoggedInNav);
