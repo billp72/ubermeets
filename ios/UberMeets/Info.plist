@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Gaining access to photo library so users may upload a picture of themself for dating purposes</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -62,7 +64,7 @@
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>needed to get location data</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>The app will continue to track your location even while it's minimized so different users can contact you as you travel. See Privacy Policy for details</string>
+	<string>The app will continue to track your location even while it&apos;s minimized so different users can contact you as you travel. See Privacy Policy for details</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Gaining location data from your phone is vital for app functionality as it provides a way to connect you with other users in your area. See privacy policy for details</string>
 	<key>UIBackgroundModes</key>
