@@ -5,6 +5,7 @@ import {
 } from 'react-native'
 import auth from '@react-native-firebase/auth';
 import firestore, {firebase} from '@react-native-firebase/firestore';
+import TrackingIos from '../Components/Component';
 const emitter = require('tiny-emitter/instance');
 
 const FIREBASE_REF_MESSAGES = firestore().collection('chat');
@@ -123,6 +124,7 @@ class Matches extends Component {
 
       return (
         <View style={styles.container}>
+            <TrackingIos />
             {this.noMatches(this.state.data)}     
             <Animated.ScrollView
                 vertical

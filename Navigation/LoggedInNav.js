@@ -8,19 +8,20 @@ import Profile                   from '../screens/Profile';
 import FBProfile                 from '../screens/FBProfile';
 import Chat                      from '../screens/Chat';
 import Ads                       from '../screens/Ads';
+import ImagePicker               from '../screens/ImagePicker';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator }  from 'react-navigation-stack';
 
 const Main = createMaterialTopTabNavigator({
+   Profile: {
+      screen: Profile
+    },
     Map: {
       screen: Map
     },
     Matches: {
       screen: Matches
-    },
-    Profile: {
-      screen: Profile
-    },
+    }
   },{
     tabBarOptions:{
       style:{
@@ -45,6 +46,9 @@ const Main = createMaterialTopTabNavigator({
     },
     Ads: {
       screen: Ads
+    },
+    Gallary: {
+      screen: ImagePicker
     }
   },
   {

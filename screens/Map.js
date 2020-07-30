@@ -10,7 +10,7 @@ import auth from '@react-native-firebase/auth';
 import firestore, {firebase} from '@react-native-firebase/firestore';
 import { GeoFirestore } from 'geofirestore';
 import { userServices } from '../services/UserServices';
-
+import TrackingIos from '../Components/Component'
 import Images          from '../Components/Images';
 const emitter = require('tiny-emitter/instance');
 
@@ -302,7 +302,9 @@ class Map extends Component {
         return (
           
           <View style={styles.container}>
+            
             <Statusbar barStyle="light-content" />
+            <TrackingIos />
             <MapView
                ref={map => this.map = map}
                provider={PROVIDER_GOOGLE}

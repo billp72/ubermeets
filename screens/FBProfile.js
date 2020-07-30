@@ -4,7 +4,8 @@ import {
     Text, StyleSheet, View, Image, Button
 } from 'react-native';
 import Footer from '../Components/Footer';
-import { dateToAge } from '../services/Helpers';
+import { dateToAge, validURL } from '../services/Helpers';
+import TrackingIos from '../Components/Component';
 
 class FBProfile extends Component {
     constructor(props){
@@ -21,6 +22,7 @@ class FBProfile extends Component {
         const { params } = this.props.navigation.state;
         return (
           <React.Fragment>
+            <TrackingIos />
             <View style={styles.container}>
                 <Image 
                     source={{uri:params.image}}
@@ -35,11 +37,10 @@ class FBProfile extends Component {
             <Footer
                 centerComponent={{ icon: 'home', color: '#fff', 
                 'onPress': () => this.props.navigation.navigate('Chat', params), size:36}}
-                 containerStyle={{
+                containerStyle={{
                     backgroundColor: '#3D6DCC',
                     justifyContent: 'center',
-                    bottom:0,
-                  }}     
+                  }}   
             />
           </React.Fragment>
         )
