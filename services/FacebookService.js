@@ -60,7 +60,7 @@ class FacebookService {
           new GraphRequestManager().addRequest(request).start()
         })
         .catch(err => {
-          console.log(err)
+          reject(err)
         })
     })
   }

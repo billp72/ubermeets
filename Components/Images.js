@@ -4,6 +4,7 @@ import {
     Text, StyleSheet, View, Image, TouchableHighlight, Alert, Dimensions
 } from 'react-native'
 import { flagContent } from '../services/SendMessage';
+import { validURL } from '../services/Helpers';
 
 const { width, height } = Dimensions.get("window");
 

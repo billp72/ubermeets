@@ -6,6 +6,7 @@ import MessageForm from './MessageForm'
 import Footer from '../../Components/Footer';
 import ChatImage from '../../Components/ChatImage';
 import styles from './Styles'
+import TrackingIos from '../../Components/Component';
 
 class ChatScreenComponent extends Component {
   
@@ -16,6 +17,7 @@ class ChatScreenComponent extends Component {
   render(){
       return (
         <React.Fragment>
+          <TrackingIos />
           <KeyboardAvoidingView
             style={styles.container}
             behavior='padding'

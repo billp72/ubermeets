@@ -6,7 +6,7 @@ import {
 import Buttons from '../Components/Buttons';
 import Footer from '../Components/Footer';
 import { userServices } from '../services/UserServices';
-
+import TrackingIos from '../Components/Component';
 
 class Ads extends Component {
     constructor(props){
@@ -33,6 +33,7 @@ class Ads extends Component {
         const { params } = this.props.navigation.state;
         return (
           <React.Fragment>
+            <TrackingIos />
             <View style={styles.container}>
                 <Image 
                     source={{uri:params.image}}

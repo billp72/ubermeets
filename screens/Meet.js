@@ -6,7 +6,8 @@ import {
 import Buttons from '../Components/Buttons';
 import Footer from '../Components/Footer';
 import { userServices } from '../services/UserServices';
-import { dateToAge } from '../services/Helpers';
+import { dateToAge, validURL } from '../services/Helpers';
+import TrackingIos from '../Components/Component';
 
 class Meet extends Component {
     constructor(props){
@@ -44,6 +45,7 @@ class Meet extends Component {
         const { params } = this.props.navigation.state;
         return (
           <React.Fragment>
+            <TrackingIos />
             <View style={styles.container}>
                 <Image 
                     source={{uri:params.image}}
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent:"space-between",
         position:"absolute",
-        bottom:100,
+        bottom:110,
     },
 });
 
