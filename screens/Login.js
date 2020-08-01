@@ -91,7 +91,7 @@ export default class LogInPage extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <View style={styles.main}>
         <TrackingIos />
         <Image source={require('../assets/mainphoto.jpg')} style={{width:'100%', height:this.state.imageHeight}} />
          <View style={styles.container}>
@@ -126,7 +126,7 @@ export default class LogInPage extends React.Component {
           </TouchableOpacity>
           {this.AppleBtn(this.state.show)}
         </View>
-      </React.Fragment>
+      </View>
     )
   }
 
@@ -254,5 +254,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius:5
+  },
+  main:{
+    flex:1
   }
 })
