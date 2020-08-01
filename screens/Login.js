@@ -29,7 +29,7 @@ export default class LogInPage extends React.Component {
     this.GeoCollectionReferenceSet = null;
     this.login = this.login.bind(this)
     this.state = {
-      imageHeight: Dimensions.get('window').width - 70,
+      imageHeight: Dimensions.get('window').width - 180,
       toggle:false,
       termsAccepted: false,
       modalVisible: false
@@ -54,7 +54,7 @@ export default class LogInPage extends React.Component {
 
 
  AppleBtn = (show) => {
-   if(show){
+   //if(show){
     return (
       <AppleButton
         buttonStyle={AppleButton.Style.BLACK}
@@ -66,7 +66,7 @@ export default class LogInPage extends React.Component {
         style={styles.appleButton}
       />
     )
-   }
+   //}
   }
   selectGender = () => {
     Alert.prompt(

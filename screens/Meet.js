@@ -98,6 +98,9 @@ const styles = StyleSheet.create({
         position:"absolute",
         bottom:110,
     },
+    main:{
+        flex:1
+    }
 });
 
 export default Meet;
