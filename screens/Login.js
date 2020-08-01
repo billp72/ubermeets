@@ -29,7 +29,7 @@ export default class LogInPage extends React.Component {
     this.GeoCollectionReferenceSet = null;
     this.login = this.login.bind(this)
     this.state = {
-      imageHeight: Dimensions.get('window').width - 50,
+      imageHeight: Dimensions.get('window').width - 70,
       toggle:false,
       termsAccepted: false,
       modalVisible: false

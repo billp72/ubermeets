@@ -207,7 +207,7 @@ class Profile extends Component {
 
     render() {
         return (
-          <React.Fragment>
+          <View style={styles.main}>
              <Modal
                 animationType="slide"
                 transparent={true}
@@ -269,7 +269,7 @@ class Profile extends Component {
                 <Text>{'\n'}</Text>
                 {this.AppleLogout(this.state.applelogin)}
             </View>
-          </React.Fragment>
+          </View>
         )
     }
 
@@ -357,6 +357,9 @@ const styles = StyleSheet.create({
         borderWidth: 1, 
         fontSize:26,
         marginBottom:10
+      },
+      main:{
+        flex:1
       }
 });
 

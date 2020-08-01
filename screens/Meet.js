@@ -44,7 +44,7 @@ class Meet extends Component {
     render() {
         const { params } = this.props.navigation.state;
         return (
-          <React.Fragment>
+          <View style={styles.main}>
             <TrackingIos />
             <View style={styles.container}>
                 <Image 
@@ -73,7 +73,7 @@ class Meet extends Component {
                     bottom:0,
                   }}     
             />
-          </React.Fragment>
+          </View>
         )
     }
 }

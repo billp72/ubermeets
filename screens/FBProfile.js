@@ -21,7 +21,7 @@ class FBProfile extends Component {
     render() {
         const { params } = this.props.navigation.state;
         return (
-          <React.Fragment>
+          <View style={styles.main}>
             <TrackingIos />
             <View style={styles.container}>
                 <Image 
@@ -42,7 +42,7 @@ class FBProfile extends Component {
                     justifyContent: 'center',
                   }}   
             />
-          </React.Fragment>
+          </View>
         )
     }
 }
@@ -67,6 +67,9 @@ const styles = StyleSheet.create({
         position:"absolute",
         bottom:100,
     },
+    main:{
+        flex:1
+      }
 });
 
 export default FBProfile;
